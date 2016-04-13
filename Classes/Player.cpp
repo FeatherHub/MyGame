@@ -2,13 +2,23 @@
 #include "Player.h"
 
 /*
+Set m_keyState before calling StartUpdate();
+Set m_isRequesting at the end of the game logic 
+*/
 
-Should set m_keyState Before Call StartUpdate();
+//이동방식
+/*
+타일맵으로 한다면
+
+키 입력 인식 -> **이동 허가** ->
+타일맵 오프셋만큼 이동 + 이동 애니메이션 재생 
+-> 끝날 때까지 이동 허가x -> 끝나면 이동 허가
 
 */
 
+
 Player::Player() : m_direction(SOUTH), m_keyState(nullptr), m_sprite(nullptr), m_speed(DEFAULT_SPEED),
-m_currentKeyCode(EventKeyboard::KeyCode::KEY_NONE)
+m_isCollided(false), m_isRequesting(false), m_currentKeyCode(EventKeyboard::KeyCode::KEY_NONE)
 {
 }
 
@@ -33,6 +43,9 @@ bool Player::init()
 
 void Player::update(float dt)
 {
+	if (!m_isCollided)
+		return;
+
 	switch (m_currentKeyCode)
 	{
 	case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
@@ -64,8 +77,15 @@ void Player::update(float dt)
 		m_direction = SOUTH;
 		return;
 	case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
-		//인터랙션 요청 -> 매니저가 방향에 오브젝트 있으면 인터랙션 연결해줌 
-		//										없으면 플래그 꺼주고 없다는 알림
+		m_isRequesting = true;
+		/*
+			인터랙션 요청 -> 매니저가 인식
+			방향에 오브젝트 
+				있으면
+					플래그 꺼주고 매니저가 오브젝트와 인터랙션을 맵핑해줌
+				없으면 
+					플래그 꺼줌
+		*/
 		return;
 	}
 
