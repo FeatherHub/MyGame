@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "TestScene.h"
-
-USING_NS_CC;
+#include "KeyStateManager.h"
+#include "Player.h"
 
 Scene* TestScene::createScene()
 {
@@ -24,39 +24,21 @@ bool TestScene::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(TestScene::menuCloseCallback, this));
-    
-	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
-                                origin.y + closeItem->getContentSize().height/2));
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    addChild(menu, 1);
+	m_keyStateManager = KeyStateManager::create();
+	m_player = Player::create();
 
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
-    
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height));
-  
-	addChild(label, 1);
+	m_player->InitKeyState(m_keyStateManager->GetKeyState());
+	m_player->StartUpdate();
 
-    auto sprite = Sprite::create("HelloWorld.png");
+	addChild(m_keyStateManager);
+	addChild(m_player);
 
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+	scheduleUpdate();
 
-    addChild(sprite, 0);
-    
     return true;
 }
 
-
-void TestScene::menuCloseCallback(Ref* pSender)
+void TestScene::update(float dt)
 {
-    Director::getInstance()->end();
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
-#endif
+	m_player->SetCurrentKey(m_keyStateManager->GetCurrentKeyCode());
 }

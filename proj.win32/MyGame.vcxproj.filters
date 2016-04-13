@@ -25,6 +25,15 @@
     <Filter Include="Player">
       <UniqueIdentifier>{08553518-4823-4e6c-bbb8-5253bf1c3436}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{14e8a022-d762-4d46-bc93-2b973418b676}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{bdb0a81d-6efe-4ae7-bc7d-b10ff3ddbbc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config\KeyConfig">
+      <UniqueIdentifier>{b8e3c215-5a12-473c-b575-b86b6ad46788}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -44,6 +53,12 @@
       <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\stdafx.cpp" />
+    <ClCompile Include="..\Classes\KeyStateManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\KeyConfig.cpp">
+      <Filter>Config\KeyConfig</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -63,6 +78,15 @@
       <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\stdafx.h" />
+    <ClInclude Include="..\Classes\KeyStateManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\KeyConfig.h">
+      <Filter>Config\KeyConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PlayerConfig.h">
+      <Filter>Config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
