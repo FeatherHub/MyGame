@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "MainScene.h"
 
 USING_NS_CC;
