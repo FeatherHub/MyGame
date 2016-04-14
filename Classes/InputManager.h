@@ -2,12 +2,12 @@
 
 #include "KeyConfig.h"
 
-class KeyStateManager : public Node
+class InputManager : public Node
 {
 public:
-	CREATE_FUNC(KeyStateManager);
-	KeyStateManager();
-	~KeyStateManager();
+	CREATE_FUNC(InputManager);
+	InputManager();
+	~InputManager();
 	virtual bool init() override;
 	KeyPressed* GetKeyState() { return m_keyState; }
 	EventKeyboard::KeyCode GetCurrentKeyCode() { return m_currentkeyCode; }

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "TestScene.h"
-#include "KeyStateManager.h"
+#include "InputManager.h"
 #include "Player.h"
 
 Scene* TestScene::createScene()
@@ -24,7 +24,7 @@ bool TestScene::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	m_keyStateManager = KeyStateManager::create();
+	m_keyStateManager = InputManager::create();
 	m_player = Player::create();
 
 	m_player->InitKeyState(m_keyStateManager->GetKeyState());

@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "KeyStateManager.h"
+#include "InputManager.h"
 
-KeyStateManager::KeyStateManager() : m_currentkeyCode(EventKeyboard::KeyCode::KEY_NONE)
+InputManager::InputManager() : m_currentkeyCode(EventKeyboard::KeyCode::KEY_NONE)
 {
 	for (KeyPressed& key : m_keyState)
 	{
@@ -9,12 +9,12 @@ KeyStateManager::KeyStateManager() : m_currentkeyCode(EventKeyboard::KeyCode::KE
 	}
 }
 
-KeyStateManager::~KeyStateManager()
+InputManager::~InputManager()
 {
 
 }
 
-bool KeyStateManager::init()
+bool InputManager::init()
 {
 	if (!Node::init())
 	{
@@ -22,14 +22,14 @@ bool KeyStateManager::init()
 	}
 
 	EventListenerKeyboard* keyboardListener = EventListenerKeyboard::create();
-	keyboardListener->onKeyPressed = CC_CALLBACK_1(KeyStateManager::OnKeyPressed, this);
-	keyboardListener->onKeyReleased = CC_CALLBACK_1(KeyStateManager::OnKeyReleased, this);
+	keyboardListener->onKeyPressed = CC_CALLBACK_1(InputManager::OnKeyPressed, this);
+	keyboardListener->onKeyReleased = CC_CALLBACK_1(InputManager::OnKeyReleased, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(keyboardListener, this);
 
 	return true;
 }
 
-void KeyStateManager::OnKeyPressed(EventKeyboard::KeyCode keyCode)
+void InputManager::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 {
 	m_currentkeyCode = keyCode;
 	switch (keyCode)
@@ -52,7 +52,7 @@ void KeyStateManager::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 	}
 }
 
-void KeyStateManager::OnKeyReleased(EventKeyboard::KeyCode keyCode)
+void InputManager::OnKeyReleased(EventKeyboard::KeyCode keyCode)
 {
 	m_currentkeyCode = EventKeyboard::KeyCode::KEY_NONE;
 	switch (keyCode)

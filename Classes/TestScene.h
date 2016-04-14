@@ -2,7 +2,7 @@
 #define __TEST_SCENE_H__
 
 class Player;
-class KeyStateManager;
+class InputManager;
 
 class TestScene : public Layer
 {
@@ -18,7 +18,7 @@ public:
 private:
 	////GameManager에 들어갈 내용
 	Player* m_player;
-	KeyStateManager* m_keyStateManager;
+	InputManager* m_keyStateManager;
 };
 
 #endif

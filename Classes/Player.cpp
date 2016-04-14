@@ -16,7 +16,6 @@ Set m_isRequesting at the end of the game logic
 
 */
 
-
 Player::Player() : m_direction(SOUTH), m_keyState(nullptr), m_sprite(nullptr), m_speed(DEFAULT_SPEED),
 m_isCollided(false), m_isRequesting(false), m_currentKeyCode(EventKeyboard::KeyCode::KEY_NONE)
 {
@@ -43,7 +42,7 @@ bool Player::init()
 
 void Player::update(float dt)
 {
-	if (!m_isCollided)
+	if (m_isCollided)
 		return;
 
 	switch (m_currentKeyCode)
