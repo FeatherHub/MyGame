@@ -1,8 +1,8 @@
 #pragma once
 
-#include "GameObject.h"
+#include "InteractiveObject.h"
 
-class Mirror : public GameObject
+class Mirror : public InteractiveObject
 {
 public:
 	Mirror();

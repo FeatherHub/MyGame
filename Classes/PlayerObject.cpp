@@ -3,7 +3,6 @@
 
 PlayerObject::PlayerObject() : m_keyState(nullptr), m_currentKeyCode(EventKeyboard::KeyCode::KEY_NONE)
 {
-
 }
 
 PlayerObject::~PlayerObject()

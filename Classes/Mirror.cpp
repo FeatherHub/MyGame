@@ -3,7 +3,7 @@
 
 bool Mirror::init()
 {
-
+	return true;
 }
 
 void Mirror::Play()

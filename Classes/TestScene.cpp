@@ -18,13 +18,8 @@ Scene* TestScene::createScene()
 bool TestScene::init()
 {
     if ( !Layer::init() )
-    {
         return false;
-    }
-    
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
+   
 	m_gameManager = new GameManager();
 
 	m_inputManager = InputManager::create();
@@ -35,7 +30,7 @@ bool TestScene::init()
 	addChild(m_inputManager);
 
 	scheduleUpdate();
-
+	
     return true;
 }
 

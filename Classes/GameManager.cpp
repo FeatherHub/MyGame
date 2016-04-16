@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GameManager.h"
 #include "Player.h"
-#include "GameObject.h"
+#include "InteractiveObject.h"
 
 GameManager::GameManager() : m_mode(PLAYER_MODE)
 {
@@ -47,11 +47,12 @@ void GameManager::MakeInteraction()
 
 bool GameManager::CheckCollision() const
 {
-
+	return true;
 }
 
 bool GameManager::IsInteractionAvailable() const
 {
+	return true;
 	//가능하면
 	//return true;
 

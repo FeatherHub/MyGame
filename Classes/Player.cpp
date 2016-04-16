@@ -36,6 +36,9 @@ bool Player::init()
 
 void Player::update(float dt)
 {
+	if (m_currentKeyCode == EventKeyboard::KeyCode::KEY_SPACE)
+		m_isRequesting = true;
+
 	switch (m_currentKeyCode)
 	{
 	case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
@@ -47,7 +50,7 @@ void Player::update(float dt)
 		return;
 	case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
 		if (m_keyState[LEFT])
-			return;;
+			return;
 
 		setPosition(getPosition() + Vec2(m_speed, 0));
 		m_direction = EAST;
@@ -66,25 +69,47 @@ void Player::update(float dt)
 		setPosition(getPosition() + Vec2(0, -m_speed));
 		m_direction = SOUTH;
 		return;
-	case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
-		m_isRequesting = true;
 		/*
-			인터랙션 요청 -> 매니저가 인식
-			방향에 오브젝트 
-				있으면
-					플래그 꺼주고 매니저가 오브젝트와 인터랙션을 맵핑해줌
-				없으면 
-					플래그 꺼줌
-		*/
-		return;
+			default:
+			{
+			switch (m_direction)
+			{
+			case NORTH:
+			setPosition(getPosition() + Vec2(0, m_speed));
+			break;
+			case SOUTH:
+			setPosition(getPosition() + Vec2(0, -m_speed));
+			break;
+			case WEST:
+			setPosition(getPosition() + Vec2(-m_speed, 0));
+			break;
+			case EAST:
+			setPosition(getPosition() + Vec2(m_speed, 0));
+			break;
+			}
+			}
+			return;
+			*/
 	}
 
 	if (m_keyState[UP])
+	{
 		setPosition(getPosition() + Vec2(0, +m_speed));
+		return;
+	}
 	if (m_keyState[DOWN])
+	{
 		setPosition(getPosition() + Vec2(0, -m_speed));
+		return;
+	}
 	if (m_keyState[RIGHT])
+	{
 		setPosition(getPosition() + Vec2(m_speed, 0));
+		return;
+	}
 	if (m_keyState[LEFT])
+	{
 		setPosition(getPosition() + Vec2(-m_speed, 0));
+		return;
+	}
 }
