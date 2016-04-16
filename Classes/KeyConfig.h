@@ -9,5 +9,3 @@ enum KEYCODE : short
 	SPACE,
 	KEYCODE_NUMBER
 };
-
-typedef bool KeyPressed;
