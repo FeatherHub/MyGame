@@ -3,6 +3,7 @@
 
 class Player;
 class InputManager;
+class GameManager;
 
 class TestScene : public Layer
 {
@@ -16,9 +17,8 @@ public:
 	void update(float dt);
 
 private:
-	////GameManager에 들어갈 내용
-	Player* m_player;
-	InputManager* m_keyStateManager;
+	GameManager* m_gameManager;
+	InputManager* m_inputManager;
 };
 
 #endif

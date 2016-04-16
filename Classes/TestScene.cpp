@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "TestScene.h"
 #include "InputManager.h"
+#include "GameManager.h"
 #include "Player.h"
 
 Scene* TestScene::createScene()
@@ -24,14 +25,14 @@ bool TestScene::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	m_keyStateManager = InputManager::create();
-	m_player = Player::create();
+	m_gameManager = new GameManager();
 
-	m_player->InitKeyState(m_keyStateManager->GetKeyState());
-	m_player->StartUpdate();
+	m_inputManager = InputManager::create();
 
-	addChild(m_keyStateManager);
-	addChild(m_player);
+	m_gameManager->AddToLayer(this);
+	m_gameManager->InitKeyInput(m_inputManager->GetKeyState());
+
+	addChild(m_inputManager);
 
 	scheduleUpdate();
 
@@ -40,5 +41,5 @@ bool TestScene::init()
 
 void TestScene::update(float dt)
 {
-	m_player->SetCurrentKey(m_keyStateManager->GetCurrentKeyCode());
+	m_gameManager->SynchronizeKeyInput(m_inputManager->GetCurrentKeyCode());
 }
