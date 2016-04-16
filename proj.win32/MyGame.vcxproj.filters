@@ -22,9 +22,6 @@
     <Filter Include="GameObject">
       <UniqueIdentifier>{a735c499-2a65-47a3-aa56-843e50c7bb3f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Player">
-      <UniqueIdentifier>{08553518-4823-4e6c-bbb8-5253bf1c3436}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Manager">
       <UniqueIdentifier>{14e8a022-d762-4d46-bc93-2b973418b676}</UniqueIdentifier>
     </Filter>
@@ -36,6 +33,12 @@
     </Filter>
     <Filter Include="GameObject\Base">
       <UniqueIdentifier>{24ba54ba-4bd7-40e6-a8a7-d852f9debd42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayerObject">
+      <UniqueIdentifier>{08553518-4823-4e6c-bbb8-5253bf1c3436}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayerObject\Base">
+      <UniqueIdentifier>{9c191bbf-e07b-4438-9bd7-eef269abd2a5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -53,20 +56,20 @@
       <Filter>Scene\Test</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Player.cpp">
-      <Filter>Player</Filter>
+      <Filter>PlayerObject</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\stdafx.cpp" />
-    <ClCompile Include="..\Classes\KeyConfig.cpp">
-      <Filter>Config\KeyConfig</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\InputManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameObject.cpp">
       <Filter>GameObject\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PlayerObject.cpp">
+      <Filter>PlayerObject\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +87,7 @@
       <Filter>Scene\Test</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Player.h">
-      <Filter>Player</Filter>
+      <Filter>PlayerObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\stdafx.h" />
     <ClInclude Include="..\Classes\KeyConfig.h">
@@ -96,11 +99,17 @@
     <ClInclude Include="..\Classes\InputManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\GameObject.h">
       <Filter>GameObject\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PlayerObject.h">
+      <Filter>PlayerObject\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameManagerConfig.h">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
