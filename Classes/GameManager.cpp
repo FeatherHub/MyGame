@@ -23,7 +23,7 @@ void GameManager::Init()
 	m_player->setPosition(300, 300);
 }
 
-void GameManager::AddToLayer(Layer* layer)
+void GameManager::AddToLayer(Layer* layer) const
 {
 	if (!layer)
 		return;
@@ -33,23 +33,28 @@ void GameManager::AddToLayer(Layer* layer)
 
 void GameManager::MakeInteraction()
 {
+	if (!m_player->IsRequesting())
+		return;
+
 	if (!IsInteractionAvailable())
 		return;
+
+	//Logics
 }
 
-bool GameManager::IsInteractionAvailable()
+bool GameManager::IsInteractionAvailable() const
 {
 	if (!m_player)
 		return false;
 
 	//가능하면
-	return true;
+	//return true;
 
-	//인터랙션 할 수 있는 객체가 direction에 없으면
-	return false;
+	//인터랙션 할 수 있는 객체가 direction방향에 없으면
+	//return false;
 }
 
-void GameManager::InitKeyInput(bool* keyState)
+void GameManager::InitKeyInput(bool* keyState) const
 {
 	switch (m_mode)
 	{
@@ -64,7 +69,7 @@ void GameManager::InitKeyInput(bool* keyState)
 	}
 }
 
-void GameManager::SynchronizeKeyInput(EventKeyboard::KeyCode keyCode)
+void GameManager::SynchronizeKeyInput(EventKeyboard::KeyCode keyCode) const
 {
 	switch (m_mode)
 	{
