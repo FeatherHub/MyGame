@@ -34,6 +34,9 @@
     <Filter Include="Config\KeyConfig">
       <UniqueIdentifier>{b8e3c215-5a12-473c-b575-b86b6ad46788}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Base">
+      <UniqueIdentifier>{24ba54ba-4bd7-40e6-a8a7-d852f9debd42}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -58,6 +61,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\InputManager.cpp">
       <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject.cpp">
+      <Filter>GameObject\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +95,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\InputManager.h">
       <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject.h">
+      <Filter>GameObject\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
