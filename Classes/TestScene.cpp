@@ -42,4 +42,5 @@ bool TestScene::init()
 void TestScene::update(float dt)
 {
 	m_gameManager->SynchronizeKeyInput(m_inputManager->GetCurrentKeyCode());
+	m_gameManager->MakeInteraction();
 }
