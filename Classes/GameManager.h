@@ -27,8 +27,7 @@ public:
 
 private:
 	void Init();
-//	OBJECT_TYPE CheckCollision() const; //<--기각될 수도 있음 이유는 .cpp파일 참고
-	bool CheckCollision() const;
+	GameObject* CheckCollision() const;
 
 	bool IsInteractionAvailable() const;
 	Vector<GameObject*> m_gameObjects;
