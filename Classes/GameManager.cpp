@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "GameObject.h"
 
-GameManager::GameManager() : m_isGameMode(false)
+GameManager::GameManager() : m_mode(PLAYER_MODE)
 {
 	Init();
 }
@@ -51,21 +51,47 @@ bool GameManager::IsInteractionAvailable()
 
 void GameManager::InitKeyInput(bool* keyState)
 {
-	//if(일반모드이면)
-	m_player->InitKeyState(keyState);
-	m_player->StartUpdate();
-	//else if(선택모드이면)
-	//m_selectBar->InitKeyState(keyState);
-	//else if(게임모드이면)
-	//m_gameBar->InitKeyState(keyState);
-
-
+	switch (m_mode)
+	{
+	case PLAYER_MODE:
+		m_player->InitKeyState(keyState);
+		m_player->StartUpdate();
+		break;
+	case GAME_MODE:
+		break;
+	case SELECT_MODE:
+		break;
+	}
 }
 
 void GameManager::SynchronizeKeyInput(EventKeyboard::KeyCode keyCode)
 {
-	if (m_isGameMode)
-		1;
-	else
+	switch (m_mode)
+	{
+	case PLAYER_MODE:
 		m_player->SetCurrentKey(keyCode);
+		break;
+	case GAME_MODE:
+		break;
+	case SELECT_MODE:
+		break;
+	}		
+}
+
+void GameManager::ChangeToPlayerMode()
+{
+	m_player->StartUpdate();
+	m_mode = PLAYER_MODE;
+}
+
+void GameManager::ChangeToGameMode()
+{
+	m_player->StopUpdate();
+	m_mode = GAME_MODE;
+}
+
+void GameManager::ChangeToSelectMode()
+{
+	m_player->StartUpdate();
+	m_mode = SELECT_MODE;
 }
