@@ -3,7 +3,7 @@
 #include "GameManagerConfig.h"
 
 class Player;
-class InteractiveObject;
+class GameObject;
 
 class GameManager
 {
@@ -26,9 +26,9 @@ public:
 
 private:
 	void Init();
-	bool CheckCollision() const;
+	OBJECT_TYPE CheckCollision() const;
 	bool IsInteractionAvailable() const;
-	Vector<InteractiveObject*> m_gameObjects;
+	Vector<GameObject*> m_gameObjects;
 	Player* m_player;
 	MODE m_mode;
 };

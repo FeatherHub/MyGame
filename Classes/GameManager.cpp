@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GameManager.h"
 #include "Player.h"
-#include "InteractiveObject.h"
+#include "GameObject.h"
 
 GameManager::GameManager() : m_mode(PLAYER_MODE)
 {
@@ -36,34 +36,58 @@ void GameManager::MakeInteraction()
 	if (!m_player->IsRequesting())
 		return;
 
-	if (!CheckCollision() || !IsInteractionAvailable())
+	if (!IsInteractionAvailable())
 	{
 		m_player->TurnOffRequesting();
 		return;
 	}
 
-	//////////
-	/*Logic*/
+	switch (CheckCollision())
+	{
+	case INTERACTIVE:
+		//////////
+		/*Logic*/
 
 
 
 
 
 
-	//////////
+		//////////
+		break;
+	case EVENT:
+		//////////
+		/*Logic*/
 
+
+
+
+
+
+		//////////
+		break;
+	}
 
 	m_player->TurnOffRequesting();
 }
 
-bool GameManager::CheckCollision() const
+OBJECT_TYPE GameManager::CheckCollision() const
 {
-	return true;
+	//EVENT Object의 충돌체크는 자기를 감싸는 두 칸 큰 사각형에 있을 때 true
+
+	//INTERACTIVE Object의 충돌체크는 자기 방향 한 칸 앞에 있을 때 true 
+	
+	//각 경우의 false는 NONE을 반환
+
+	return NONE;
+	return EVENT;
+	return INTERACTIVE;
 }
 
 bool GameManager::IsInteractionAvailable() const
 {
 	return true;
+	
 	//가능하면
 	//return true;
 
