@@ -36,17 +36,22 @@ void GameManager::MakeInteraction()
 	if (!m_player->IsRequesting())
 		return;
 
-	if (!IsInteractionAvailable())
+	if (!CheckCollision() || !IsInteractionAvailable())
+	{
+		m_player->TurnOffRequesting();
 		return;
+	}
 
 	//Logics
 }
 
+bool GameManager::CheckCollision() const
+{
+
+}
+
 bool GameManager::IsInteractionAvailable() const
 {
-	if (!m_player)
-		return false;
-
 	//가능하면
 	//return true;
 

@@ -26,6 +26,7 @@ public:
 
 private:
 	void Init();
+	bool CheckCollision() const;
 	bool IsInteractionAvailable() const;
 	Vector<GameObject*> m_gameObjects;
 	Player* m_player;
