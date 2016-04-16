@@ -1,13 +1,11 @@
 #pragma once
 
+#include "GameObject.h"
+
 class Player;
 
-class EventObject : public Node
+class EventObject : public GameObject
 {
 public:
-	virtual bool init() = 0;
-	virtual void Play() = 0;
-	virtual void SetEffect(Player* player) = 0;
-protected:
-	Sprite* m_sprite;
+	OBJECT_TYPE GetObjectType() { return OBJECT_TYPE::EVENT; }
 };
