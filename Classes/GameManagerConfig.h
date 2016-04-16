@@ -1,0 +1,6 @@
+enum MODE
+{
+	PLAYER_MODE,
+	GAME_MODE,
+	SELECT_MODE
+};
