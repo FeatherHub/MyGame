@@ -10,7 +10,7 @@ public:
 	Player();
 	~Player();
 	virtual bool init() override;
-	void InitKeyState(KeyPressed* keyState) { m_keyState = keyState; }
+	void InitKeyState(bool* keyState) { m_keyState = keyState; }
 	void SetCurrentKey(EventKeyboard::KeyCode keyCode) { m_currentKeyCode = keyCode; }
 	void SetCollided(bool isCollided) { m_isCollided = isCollided; }
 	void StartUpdate();
@@ -20,7 +20,7 @@ public:
 private:
 	void update(float dt);
 	DIRECTION m_direction = SOUTH;
-	KeyPressed* m_keyState = nullptr;
+	bool* m_keyState = nullptr;
 	EventKeyboard::KeyCode m_currentKeyCode = EventKeyboard::KeyCode::KEY_NONE;
 	Sprite* m_sprite = nullptr;
 	float m_speed = DEFAULT_SPEED;

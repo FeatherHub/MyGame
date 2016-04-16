@@ -3,7 +3,7 @@
 
 InputManager::InputManager() : m_currentkeyCode(EventKeyboard::KeyCode::KEY_NONE)
 {
-	for (KeyPressed& key : m_keyState)
+	for (bool& key : m_keyState)
 	{
 		key = false;
 	}
