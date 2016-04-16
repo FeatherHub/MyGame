@@ -1,4 +1,4 @@
-enum MODE
+enum MODE : short
 {
 	PLAYER_MODE,
 	GAME_MODE,
