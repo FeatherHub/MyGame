@@ -147,6 +147,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\EventObject.cpp" />
     <ClCompile Include="..\Classes\GameManager.cpp" />
     <ClCompile Include="..\Classes\InteractiveObject.cpp" />
     <ClCompile Include="..\Classes\GameScene.cpp" />
@@ -154,7 +155,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\MainScene.cpp" />
     <ClCompile Include="..\Classes\Mirror.cpp" />
     <ClCompile Include="..\Classes\Player.cpp" />
-    <ClCompile Include="..\Classes\PlayerObject.cpp" />
+    <ClCompile Include="..\Classes\PlayableObject.cpp" />
     <ClCompile Include="..\Classes\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
@@ -163,6 +164,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\EventObject.h" />
     <ClInclude Include="..\Classes\GameManager.h" />
     <ClInclude Include="..\Classes\GameManagerConfig.h" />
     <ClInclude Include="..\Classes\InteractiveObject.h" />
@@ -173,7 +175,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Mirror.h" />
     <ClInclude Include="..\Classes\Player.h" />
     <ClInclude Include="..\Classes\PlayerConfig.h" />
-    <ClInclude Include="..\Classes\PlayerObject.h" />
+    <ClInclude Include="..\Classes\PlayableObject.h" />
     <ClInclude Include="..\Classes\stdafx.h" />
     <ClInclude Include="..\Classes\TestScene.h" />
     <ClInclude Include="main.h" />

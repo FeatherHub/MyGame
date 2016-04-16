@@ -1,10 +1,10 @@
 #pragma once
 
-class PlayerObject : public Node
+class PlayableObject : public Node
 {
 public:
-	PlayerObject();
-	~PlayerObject();
+	PlayableObject();
+	~PlayableObject();
 	virtual bool init() override;
 	void InitKeyState(bool* keyState) { m_keyState = keyState; }
 	void SetCurrentKey(EventKeyboard::KeyCode keyCode) { m_currentKeyCode = keyCode; }

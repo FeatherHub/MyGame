@@ -1,10 +1,10 @@
 #pragma once
 
-#include "PlayerObject.h"
+#include "PlayableObject.h"
 #include "PlayerConfig.h"
 #include "KeyConfig.h"
 
-class Player : public PlayerObject
+class Player : public PlayableObject
 {
 public:
 	CREATE_FUNC(Player);
