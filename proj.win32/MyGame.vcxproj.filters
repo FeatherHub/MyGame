@@ -40,6 +40,9 @@
     <Filter Include="PlayerObject\Base">
       <UniqueIdentifier>{9c191bbf-e07b-4438-9bd7-eef269abd2a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Mirror">
+      <UniqueIdentifier>{f7021dce-a3fa-4dcb-858b-7f3f60bcd883}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -70,6 +73,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameManager.cpp">
       <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Mirror.cpp">
+      <Filter>GameObject\Mirror</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +116,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameManager.h">
       <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Mirror.h">
+      <Filter>GameObject\Mirror</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
