@@ -28,9 +28,6 @@
     <Filter Include="Config">
       <UniqueIdentifier>{bdb0a81d-6efe-4ae7-bc7d-b10ff3ddbbc6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Config\KeyConfig">
-      <UniqueIdentifier>{b8e3c215-5a12-473c-b575-b86b6ad46788}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Base">
       <UniqueIdentifier>{24ba54ba-4bd7-40e6-a8a7-d852f9debd42}</UniqueIdentifier>
     </Filter>
@@ -71,14 +68,11 @@
     <ClCompile Include="..\Classes\Mirror.cpp">
       <Filter>GameObject\Mirror</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\InteractiveObject.cpp">
-      <Filter>GameObject\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\EventObject.cpp">
-      <Filter>GameObject\Base</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\PlayableObject.cpp">
       <Filter>PlayerObject\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject.cpp">
+      <Filter>GameObject\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -99,9 +93,6 @@
       <Filter>PlayerObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\stdafx.h" />
-    <ClInclude Include="..\Classes\KeyConfig.h">
-      <Filter>Config\KeyConfig</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\PlayerConfig.h">
       <Filter>Config</Filter>
     </ClInclude>
@@ -117,14 +108,17 @@
     <ClInclude Include="..\Classes\Mirror.h">
       <Filter>GameObject\Mirror</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\InteractiveObject.h">
-      <Filter>GameObject\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EventObject.h">
-      <Filter>GameObject\Base</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\PlayableObject.h">
       <Filter>PlayerObject\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObjectConfig.h">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\KeyConfig.h">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject.h">
+      <Filter>GameObject\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
