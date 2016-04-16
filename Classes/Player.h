@@ -1,29 +1,26 @@
 #pragma once
 
+#include "PlayerObject.h"
 #include "PlayerConfig.h"
 #include "KeyConfig.h"
 
-class Player : public Node
+class Player : public PlayerObject
 {
 public:
 	CREATE_FUNC(Player);
 	Player();
 	~Player();
 	virtual bool init() override;
-	void InitKeyState(bool* keyState) { m_keyState = keyState; }
-	void SetCurrentKey(EventKeyboard::KeyCode keyCode) { m_currentKeyCode = keyCode; }
-	void SetCollided(bool isCollided) { m_isCollided = isCollided; }
-	void StartUpdate();
-	void StopUpdate();
+	//인터랙션을 맵핑해주었다면 IsRequesting을 꺼주세요!!
+	//인터랙션 재생 중에 인터랙션 받을까?
+	void TurnOffRequesting() { m_isRequesting = false; }
+	bool IsRequesting() { return m_isRequesting; }
 	DIRECTION GetDirection() { return m_direction; };
 
 private:
 	void update(float dt);
 	DIRECTION m_direction = SOUTH;
-	bool* m_keyState = nullptr;
-	EventKeyboard::KeyCode m_currentKeyCode = EventKeyboard::KeyCode::KEY_NONE;
 	Sprite* m_sprite = nullptr;
 	float m_speed = DEFAULT_SPEED;
-	bool m_isCollided = false;
 	bool m_isRequesting = false;
 };

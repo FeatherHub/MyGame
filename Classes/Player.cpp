@@ -1,10 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
 
-/*
-Set m_keyState before calling StartUpdate();
-Set m_isRequesting at the end of the game logic 
-*/
 
 //이동방식
 /*
@@ -16,8 +12,8 @@ Set m_isRequesting at the end of the game logic
 
 */
 
-Player::Player() : m_direction(SOUTH), m_keyState(nullptr), m_sprite(nullptr), m_speed(DEFAULT_SPEED),
-m_isCollided(false), m_isRequesting(false), m_currentKeyCode(EventKeyboard::KeyCode::KEY_NONE)
+Player::Player() : m_direction(SOUTH), m_sprite(nullptr), m_speed(DEFAULT_SPEED),
+m_isRequesting(false)
 {
 }
 
@@ -35,16 +31,11 @@ bool Player::init()
 	m_sprite = Sprite::create("player.png");
 	addChild(m_sprite);
 
-	setPosition(0, 500);
-
 	return true;
 }
 
 void Player::update(float dt)
 {
-	if (m_isCollided)
-		return;
-
 	switch (m_currentKeyCode)
 	{
 	case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
@@ -96,14 +87,4 @@ void Player::update(float dt)
 		setPosition(getPosition() + Vec2(m_speed, 0));
 	if (m_keyState[LEFT])
 		setPosition(getPosition() + Vec2(-m_speed, 0));
-}
-
-void Player::StartUpdate()
-{
-	scheduleUpdate();
-}
-
-void Player::StopUpdate()
-{
-	unscheduleUpdate();
 }
