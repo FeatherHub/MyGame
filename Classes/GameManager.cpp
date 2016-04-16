@@ -42,7 +42,18 @@ void GameManager::MakeInteraction()
 		return;
 	}
 
-	//Logics
+	//////////
+	/*Logic*/
+
+
+
+
+
+
+	//////////
+
+
+	m_player->TurnOffRequesting();
 }
 
 bool GameManager::CheckCollision() const
