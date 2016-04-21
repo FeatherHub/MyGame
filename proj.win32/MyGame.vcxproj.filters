@@ -40,6 +40,9 @@
     <Filter Include="GameObject\Mirror">
       <UniqueIdentifier>{f7021dce-a3fa-4dcb-858b-7f3f60bcd883}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Loader">
+      <UniqueIdentifier>{a97f19a4-e06b-402d-b8c8-9396d41df47c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -73,6 +76,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameObject.cpp">
       <Filter>GameObject\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MapLoader.cpp">
+      <Filter>Loader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +125,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameObject.h">
       <Filter>GameObject\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MapLoader.h">
+      <Filter>Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MapConfig.h">
+      <Filter>Config</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

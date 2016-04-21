@@ -28,7 +28,7 @@ void GameManager::AddToLayer(Layer* layer) const
 	if (!layer)
 		return;
 
-	layer->addChild(m_player);
+	layer->addChild(m_player, 1);
 }
 
 

@@ -10,5 +10,5 @@ enum DIRECTION : short
 
 enum MOVE : short
 {
-	DEFAULT_SPEED = 10
+	DEFAULT_SPEED = 5
 };
