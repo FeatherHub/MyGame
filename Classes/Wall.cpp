@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "Wall.h"
+#include "Player.h"
+#include "Babe.h"
 
 bool Wall::init()
 {
@@ -11,7 +13,7 @@ void Wall::Play()
 
 }
 
-void Wall::SetEffect(Player* player)
+void Wall::SetEffect(Player* player, Babe* babe)
 {
 
 }

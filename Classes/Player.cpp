@@ -132,9 +132,9 @@ void Player::EnterEvent(Vec2 babePos)
 void Player::ExitEvent()
 {
 	runAction(Sequence::create(
+		CallFunc::create([&](){ m_state = OUT_BABE; }),
 		EaseElasticOut::create(
 		MoveTo::create(1.0f, Vec2(100, 100)), 1.0f),
-		CallFunc::create([&](){ m_state = OUT_BABE; }),
 		nullptr
 		));
 }

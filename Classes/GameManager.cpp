@@ -6,6 +6,7 @@
 #include "GameObject.h"
 #include "MapLoader.h"
 #include "Bar.h"
+#include "Mirror.h"
 
 GameManager::GameManager() : m_mode(PLAYER_MODE)
 {
@@ -34,6 +35,11 @@ void GameManager::Init()
 	m_playerBar->setPosition(Vec2(200, 30));
 
 	m_player->SetBar(m_playerBar);
+
+	Mirror* mirror = Mirror::create();
+	mirror->setPosition(Vec2(100, 100));
+	m_gameObjects.pushBack(mirror);
+
 }
 
 void GameManager::AddToLayer(Layer* layer) const
@@ -46,7 +52,10 @@ void GameManager::AddToLayer(Layer* layer) const
 
 	layer->addChild(m_player, 1);
 	layer->addChild(m_playerBar, 0);
-	layer->addChild(m_babe, -1);
+	layer->addChild(m_babe, 0);
+
+	for (auto& gameObject : m_gameObjects)
+		layer->addChild(gameObject, -1);
 }
 
 void GameManager::Play()
@@ -77,27 +86,12 @@ void GameManager::Play()
 
 void GameManager::MakeInteraction()
 {
-	OBJECT_TYPE objectType = CheckCollision();
-
-	if (objectType == OBJECT_TYPE::NONE)
-		return;
-
-	if (objectType == OBJECT_TYPE::WALL)
-	{
-
-		return;
-	}
-
 	if (m_player->IsRequesting() == false ||
 		IsInteractionAvailable() == false)
 		return;
 
-	switch (objectType)
-	{
-	case OBJECT_TYPE::MIRROR:
-		break;
-	}
-		
+	OBJECT_TYPE objectType = CheckCollision();
+
 	m_player->TurnOffRequesting();
 }
 
@@ -105,28 +99,13 @@ OBJECT_TYPE GameManager::CheckCollision() const
 {		
 	const Rect playerBox = m_player->GetBoundingBox();
 
-	auto map = m_mapLoader->GetMap();
-	auto layer = map->getLayer("Layer");
-	auto s = layer->getLayerSize();
-	auto ts = layer->getMapTileSize();
-	
-	for (int y = 0; y < s.height; y++)
+	for (auto& gameObject : m_gameObjects)
 	{
-		for (int x = 0; x < s.width; x++)
+		if (gameObject->GetBoundingBox().intersectsRect(playerBox) == true)
 		{
-			int gid = layer->getTileGIDAt(Vec2(x, y));
-			switch (gid)
-			{
-			case OBJECT_TYPE::WALL:
-			{
-				auto wall = layer->getTileAt(Vec2(x, y));
-				if (wall->getBoundingBox().intersectsRect(playerBox))
-				{
-					return OBJECT_TYPE::WALL;
-				}
-			}
-				break;
-			}
+			gameObject->SetEffect(m_player, m_babe);
+			gameObject->Play();
+			return gameObject->GetObjectType();
 		}
 	}
 
@@ -135,7 +114,7 @@ OBJECT_TYPE GameManager::CheckCollision() const
 
 bool GameManager::IsInteractionAvailable() const
 {
-	return false;
+	return true;
 }
 
 void GameManager::InitKeyInput(bool* keyState) const
