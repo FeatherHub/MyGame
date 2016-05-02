@@ -5,6 +5,7 @@
 #include "Babe.h"
 #include "GameObject.h"
 #include "MapLoader.h"
+#include "Bar.h"
 
 GameManager::GameManager() : m_mode(PLAYER_MODE)
 {
@@ -21,10 +22,18 @@ void GameManager::Init()
 	//SceneInformation은 Scene 단위로 객체들의 위치 정보가 저장된 File을 읽는다. 
 
 	m_mapLoader = new MapLoader;
+
 	m_player = Player::create();
 	m_player->setPosition(300, 300);
+
 	m_babe = Babe::create();
 	m_babe->setPosition(200, 200);
+
+	m_playerBar = Bar::create();
+	m_playerBar->SetSprite("player_bar_current.png", "player_bar_capacity.png", "player_bar_icon.png");
+	m_playerBar->setPosition(Vec2(200, 30));
+
+	m_player->SetBar(m_playerBar);
 }
 
 void GameManager::AddToLayer(Layer* layer) const
@@ -34,8 +43,10 @@ void GameManager::AddToLayer(Layer* layer) const
 
 	m_mapLoader->SetLayer(layer);
 	m_mapLoader->PrintMap();
+
 	layer->addChild(m_player, 1);
-	layer->addChild(m_babe, 0);
+	layer->addChild(m_playerBar, 0);
+	layer->addChild(m_babe, -1);
 }
 
 void GameManager::Play()

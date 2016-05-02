@@ -46,6 +46,9 @@
     <Filter Include="GameObject\Wall">
       <UniqueIdentifier>{b41b1a60-4e08-4b47-b0e9-9e6e4d15675f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{12b84313-5c32-418b-b0c8-1d9a4eb5c354}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -88,6 +91,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Babe.cpp">
       <Filter>PlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Bar.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +155,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\BabeConfig.h">
       <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Bar.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

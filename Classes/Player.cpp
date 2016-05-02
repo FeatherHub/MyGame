@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "SimpleAudioEngine.h"
+#include "Bar.h"
 
 Player::Player() : m_direction(WEST), m_sprite(nullptr), m_speed(DEFAULT_SPEED),
 m_isRequesting(false), m_state(OUT_BABE)
@@ -27,6 +28,8 @@ void Player::update(float dt)
 	{
 		m_guage[ENTER_BABE] = 0;
  		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("enter_babe.wav");
+
+		m_bar->SetEffect(-0.4f);
    		m_state = ENTER_BABE;
 	}
 

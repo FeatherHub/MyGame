@@ -4,6 +4,8 @@
 #include "PlayerConfig.h"
 #include "KeyConfig.h"
 
+class Bar;
+
 class Player : public PlayableObject
 {
 public:
@@ -19,6 +21,7 @@ public:
 	Rect GetBoundingBox();
 	void EnterEvent(Vec2 babePos);
 	void ExitEvent();
+	void SetBar(Bar* bar) { m_bar = bar; }
 
 private:
 	void update(float dt);
@@ -29,4 +32,5 @@ private:
 	bool m_isCollided = false;
 	STATE m_state = OUT_BABE;
 	float m_guage[2];
+	Bar* m_bar;
 };

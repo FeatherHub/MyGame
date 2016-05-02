@@ -7,6 +7,7 @@ class Player;
 class Babe;
 class GameObject;
 class MapLoader;
+class Bar;
 
 class GameManager
 {
@@ -37,6 +38,8 @@ private:
 	MapLoader* m_mapLoader;
 	Vector<GameObject*> m_gameObjects;
 	Player* m_player;
+	Bar* m_playerBar;
+	Bar* m_missionBar;
 	Babe* m_babe;
 	MODE m_mode;
 	Layer* m_runningScene;
