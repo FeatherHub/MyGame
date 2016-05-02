@@ -43,6 +43,9 @@
     <Filter Include="Loader">
       <UniqueIdentifier>{a97f19a4-e06b-402d-b8c8-9396d41df47c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Wall">
+      <UniqueIdentifier>{b41b1a60-4e08-4b47-b0e9-9e6e4d15675f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -79,6 +82,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MapLoader.cpp">
       <Filter>Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Wall.cpp">
+      <Filter>GameObject\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Babe.cpp">
+      <Filter>PlayerObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +139,15 @@
       <Filter>Loader</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MapConfig.h">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Wall.h">
+      <Filter>GameObject\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Babe.h">
+      <Filter>PlayerObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BabeConfig.h">
       <Filter>Config</Filter>
     </ClInclude>
   </ItemGroup>

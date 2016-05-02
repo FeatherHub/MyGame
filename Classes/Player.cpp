@@ -1,34 +1,21 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "SimpleAudioEngine.h"
 
-
-//이동방식
-/*
-타일맵으로 한다면
-
-키 입력 인식 -> **이동 허가** ->
-타일맵 오프셋만큼 이동 + 이동 애니메이션 재생 
--> 끝날 때까지 이동 허가x -> 끝나면 이동 허가
-
-*/
-
-Player::Player() : m_direction(SOUTH), m_sprite(nullptr), m_speed(DEFAULT_SPEED),
-m_isRequesting(false)
+Player::Player() : m_direction(WEST), m_sprite(nullptr), m_speed(DEFAULT_SPEED),
+m_isRequesting(false), m_state(OUT_BABE)
 {
-}
-
-Player::~Player()
-{
+	m_guage[ENTER_BABE] = 0;
+	m_guage[EXIT_BABE] = 0;
 }
 
 bool Player::init()
 {
-	if (!Node::init())
-	{
+	if (Node::init() == false)
 		return false;
-	}
 
 	m_sprite = Sprite::create("player.png");
+	m_sprite->setScale(0.3f);
 	addChild(m_sprite);
 
 	return true;
@@ -36,80 +23,115 @@ bool Player::init()
 
 void Player::update(float dt)
 {
+	if (m_guage[ENTER_BABE] > 3.0f)
+	{
+		m_guage[ENTER_BABE] = 0;
+ 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("enter_babe.wav");
+   		m_state = ENTER_BABE;
+	}
+
+	if (m_guage[EXIT_BABE] > 3.0f)
+	{
+		m_guage[EXIT_BABE] = 0;
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("exit_babe.wav");
+		m_state = EXIT_BABE;
+		ExitEvent();
+	}
+
+	if (m_state == IN_BABE &&
+		m_keyState[UP] && m_keyState[SPACE])
+	{
+		m_guage[EXIT_BABE] += dt;
+		return;
+	}
+	else
+	{
+		m_guage[EXIT_BABE] = 0;
+	}
+
+	if (m_state == OUT_BABE && 
+		m_keyState[DOWN] && m_keyState[SPACE])
+	{
+		m_guage[ENTER_BABE] += dt;
+     	return;
+	}
+	else
+	{
+		m_guage[ENTER_BABE] = 0;
+	}
+
 	if (m_currentKeyCode == EventKeyboard::KeyCode::KEY_SPACE)
 		m_isRequesting = true;
 
-	switch (m_currentKeyCode)
+	switch (m_state)
 	{
-	case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-		if (m_keyState[RIGHT])
-			return;
-
-		setPosition(getPosition() + Vec2(-m_speed, 0));
-		m_direction = WEST;
-		return;
-	case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-		if (m_keyState[LEFT])
-			return;
-
-		setPosition(getPosition() + Vec2(m_speed, 0));
-		m_direction = EAST;
-		return;
-	case cocos2d::EventKeyboard::KeyCode::KEY_UP_ARROW:
-		if (m_keyState[DOWN])
-			return;
-
-		setPosition(getPosition() + Vec2(0, m_speed));
-		m_direction = NORTH;
-		return;
-	case cocos2d::EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+	case IN_BABE:
 		if (m_keyState[UP])
-			return;
+			setPosition(getPosition() + Vec2(0, +m_speed));
 
-		setPosition(getPosition() + Vec2(0, -m_speed));
-		m_direction = SOUTH;
-		return;
-		/*
-			default:
-			{
-			switch (m_direction)
-			{
-			case NORTH:
-			setPosition(getPosition() + Vec2(0, m_speed));
-			break;
-			case SOUTH:
+		if (m_keyState[DOWN])
 			setPosition(getPosition() + Vec2(0, -m_speed));
-			break;
-			case WEST:
-			setPosition(getPosition() + Vec2(-m_speed, 0));
-			break;
-			case EAST:
-			setPosition(getPosition() + Vec2(m_speed, 0));
-			break;
-			}
-			}
-			return;
-			*/
-	}
 
-	if (m_keyState[UP])
-	{
-		setPosition(getPosition() + Vec2(0, +m_speed));
-		return;
+		if (m_keyState[RIGHT])
+		{
+			setPosition(getPosition() + Vec2(m_speed, 0));
+			m_direction = WEST;
+		}
+
+		if (m_keyState[LEFT])
+		{
+			setPosition(getPosition() + Vec2(-m_speed, 0));
+			m_direction = EAST;
+		}
+		break;
+	case OUT_BABE:
+		if (m_keyState[UP])
+			setPosition(getPosition() + Vec2(0, +m_speed));
+
+		if (m_keyState[DOWN])
+			setPosition(getPosition() + Vec2(0, -m_speed));
+
+		if (m_keyState[RIGHT])
+		{
+			setPosition(getPosition() + Vec2(m_speed, 0));
+			m_direction = WEST;
+		}
+
+		if (m_keyState[LEFT])
+		{
+			setPosition(getPosition() + Vec2(-m_speed, 0));
+			m_direction = EAST;
+		}
+		break;
 	}
-	if (m_keyState[DOWN])
-	{
-		setPosition(getPosition() + Vec2(0, -m_speed));
-		return;
-	}
-	if (m_keyState[RIGHT])
-	{
-		setPosition(getPosition() + Vec2(m_speed, 0));
-		return;
-	}
-	if (m_keyState[LEFT])
-	{
-		setPosition(getPosition() + Vec2(-m_speed, 0));
-		return;
-	}
+}
+
+Rect Player::GetBoundingBox()
+{
+	Vec2 curPos = getPosition();
+	Rect sprBox = m_sprite->getBoundingBox();
+	curPos.x -= sprBox.size.width / 2;
+	curPos.y -= sprBox.size.height / 2;
+	sprBox.origin = curPos;
+	return sprBox;
+}
+
+void Player::EnterEvent(Vec2 babePos)
+{
+	runAction(Sequence::create(
+		EaseIn::create(
+		MoveTo::create(1.0f, babePos), 0.5f),
+		CallFunc::create([&](){ m_state = IN_BABE; }),
+		nullptr
+		));
+}
+
+void Player::ExitEvent()
+{
+	runAction(Sequence::create(
+		EaseElasticOut::create(
+		MoveTo::create(1.0f, Vec2(100, 100)), 1.0f),
+		CallFunc::create([&](){ m_state = OUT_BABE; }),
+		nullptr
+		));
 }

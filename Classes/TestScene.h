@@ -4,7 +4,6 @@
 class Player;
 class InputManager;
 class GameManager;
-class MapLoader;
 
 class TestScene : public Layer
 {
@@ -20,7 +19,6 @@ public:
 private:
 	GameManager* m_gameManager;
 	InputManager* m_inputManager;
-	MapLoader* m_mapLoader;
 };
 
 #endif

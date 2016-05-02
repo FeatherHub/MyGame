@@ -20,4 +20,5 @@ public:
 protected:
 	Sprite* m_sprite;
 	OBJECT_TYPE m_objectType;
+
 };

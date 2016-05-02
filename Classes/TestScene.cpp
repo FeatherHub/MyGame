@@ -2,7 +2,6 @@
 #include "TestScene.h"
 #include "InputManager.h"
 #include "GameManager.h"
-#include "MapLoader.h"
 #include "Player.h"
 
 Scene* TestScene::createScene()
@@ -22,10 +21,6 @@ bool TestScene::init()
         return false;
    
 	m_gameManager = new GameManager();
-	m_mapLoader = new MapLoader;
-
-	m_mapLoader->SetLayer(this);
-	m_mapLoader->PrintMap();
 
 	m_inputManager = InputManager::create();
 
@@ -42,5 +37,5 @@ bool TestScene::init()
 void TestScene::update(float dt)
 {
 	m_gameManager->SynchronizeKeyInput(m_inputManager->GetCurrentKeyCode());
-	m_gameManager->MakeInteraction();
+	m_gameManager->Play();
 }

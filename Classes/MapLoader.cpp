@@ -3,6 +3,6 @@
 
 void MapLoader::PrintMap()
 {
-	auto map = TMXTiledMap::create("map.tmx");
-	m_targetLayer->addChild(map, 0);
+	m_map = TMXTiledMap::create("map.tmx");
+	m_targetLayer->addChild(m_map, 0);
 }

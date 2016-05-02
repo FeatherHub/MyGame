@@ -3,6 +3,6 @@
 enum OBJECT_TYPE : int
 {
 	NONE,
-	WALL,
-	INTERACTIVE
+	WALL = 1,
+	MIRROR
 };
