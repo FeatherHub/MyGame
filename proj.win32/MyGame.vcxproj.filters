@@ -55,9 +55,6 @@
       <Filter>win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\GameScene.cpp">
-      <Filter>Scene\Game</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\MainScene.cpp">
       <Filter>Scene\Main</Filter>
     </ClCompile>
@@ -95,15 +92,18 @@
     <ClCompile Include="..\Classes\Bar.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\SnakeGameScene.cpp">
+      <Filter>Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Locker_1.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\GameScene.h">
-      <Filter>Scene\Game</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\MainScene.h">
       <Filter>Scene\Main</Filter>
     </ClInclude>
@@ -158,6 +158,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Bar.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainSceneConfig.h">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SnakeGameScene.h">
+      <Filter>Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Locker_1.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

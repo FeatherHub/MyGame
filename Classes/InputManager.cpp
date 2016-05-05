@@ -9,11 +9,6 @@ InputManager::InputManager() : m_currentkeyCode(EventKeyboard::KeyCode::KEY_NONE
 	}
 }
 
-InputManager::~InputManager()
-{
-
-}
-
 bool InputManager::init()
 {
 	if (!Node::init())

@@ -151,7 +151,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Bar.cpp" />
     <ClCompile Include="..\Classes\GameManager.cpp" />
     <ClCompile Include="..\Classes\GameObject.cpp" />
-    <ClCompile Include="..\Classes\GameScene.cpp" />
+    <ClCompile Include="..\Classes\Locker_1.cpp" />
+    <ClCompile Include="..\Classes\SnakeGameScene.cpp" />
     <ClCompile Include="..\Classes\InputManager.cpp" />
     <ClCompile Include="..\Classes\MainScene.cpp" />
     <ClCompile Include="..\Classes\MapLoader.cpp" />
@@ -174,10 +175,12 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\GameManagerConfig.h" />
     <ClInclude Include="..\Classes\GameObjectConfig.h" />
     <ClInclude Include="..\Classes\GameObject.h" />
-    <ClInclude Include="..\Classes\GameScene.h" />
+    <ClInclude Include="..\Classes\Locker_1.h" />
+    <ClInclude Include="..\Classes\SnakeGameScene.h" />
     <ClInclude Include="..\Classes\KeyConfig.h" />
     <ClInclude Include="..\Classes\InputManager.h" />
     <ClInclude Include="..\Classes\MainScene.h" />
+    <ClInclude Include="..\Classes\MainSceneConfig.h" />
     <ClInclude Include="..\Classes\MapConfig.h" />
     <ClInclude Include="..\Classes\MapLoader.h" />
     <ClInclude Include="..\Classes\Mirror.h" />

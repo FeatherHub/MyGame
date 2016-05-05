@@ -7,7 +7,7 @@ class InputManager : public Node
 public:
 	CREATE_FUNC(InputManager);
 	InputManager();
-	~InputManager();
+	~InputManager() = default;
 	virtual bool init() override;
 	bool* GetKeyState() { return m_keyState; }
 	EventKeyboard::KeyCode GetCurrentKeyCode() { return m_currentkeyCode; }

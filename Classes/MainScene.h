@@ -1,18 +1,29 @@
 #ifndef __MAIN_SCENE_H__
 #define __MAIN_SCENE_H__
 
-class MainScene : public cocos2d::Layer
+class InputManager;
+
+class MainScene : public Layer
 {
 public:
-    static cocos2d::Scene* createScene();
-
+    static Scene* createScene();
     virtual bool init();
-    
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
-    
-    // implement the "static create()" method manually
     CREATE_FUNC(MainScene);
+
+private:
+	enum CURSOR_STATE : short
+	{
+		START,
+		LOAD,
+		EXIT
+	};
+
+	void update(float delta);
+	InputManager* m_inputManager;
+	Sprite* m_cursor;
+	bool* m_keyState;
+	CURSOR_STATE m_cursorState;
+	Vec2 m_cursorPos[3];
 };
 
-#endif // __MAIN_SCENE_H__
+#endif

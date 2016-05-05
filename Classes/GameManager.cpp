@@ -15,7 +15,7 @@ GameManager::GameManager() : m_mode(PLAYER_MODE)
 
 GameManager::~GameManager()
 {
-
+	
 }
 
 void GameManager::Init()
@@ -39,7 +39,6 @@ void GameManager::Init()
 	Mirror* mirror = Mirror::create();
 	mirror->setPosition(Vec2(100, 100));
 	m_gameObjects.pushBack(mirror);
-
 }
 
 void GameManager::AddToLayer(Layer* layer) const
