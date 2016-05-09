@@ -10,7 +10,8 @@ enum DIRECTION : short
 
 enum MOVE : short
 {
-	DEFAULT_SPEED = 5
+	DEFAULT_SPEED = 5,
+	SNAKE_SPEED = 5
 };
 
 enum STATE : int

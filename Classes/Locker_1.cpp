@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Locker_1.h"
 #include "SnakeGameScene.h"
+#include "Player.h"
+#include "Babe.h"
 
 bool Locker_1::init()
 {
@@ -16,10 +18,13 @@ bool Locker_1::init()
 
 void Locker_1::Play()
 {
-	
+	runAction(CallFunc::create([](){
+		Director::getInstance()->pushScene(
+			SnakeGameScene::createScene());
+	}));
 }
 
 void Locker_1::SetEffect(Player* player, Babe* babe)
 {
-	return;
+
 }

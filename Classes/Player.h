@@ -22,7 +22,6 @@ public:
 	void EnterEvent(Vec2 babePos);
 	void ExitEvent();
 	void SetBar(Bar* bar) { m_bar = bar; }
-
 private:
 	void update(float dt);
 	DIRECTION m_direction = SOUTH;

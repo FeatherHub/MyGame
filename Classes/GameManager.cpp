@@ -7,6 +7,7 @@
 #include "MapLoader.h"
 #include "Bar.h"
 #include "Mirror.h"
+#include "Locker_1.h"
 
 GameManager::GameManager() : m_mode(PLAYER_MODE)
 {
@@ -20,8 +21,6 @@ GameManager::~GameManager()
 
 void GameManager::Init()
 {
-	//SceneInformation은 Scene 단위로 객체들의 위치 정보가 저장된 File을 읽는다. 
-
 	m_mapLoader = new MapLoader;
 
 	m_player = Player::create();
@@ -39,6 +38,11 @@ void GameManager::Init()
 	Mirror* mirror = Mirror::create();
 	mirror->setPosition(Vec2(100, 100));
 	m_gameObjects.pushBack(mirror);
+
+	Locker_1* locker_1 = Locker_1::create();
+	locker_1->setPosition(Vec2(400, 250));
+	locker_1->setScale(0.3f);
+	m_gameObjects.pushBack(locker_1);
 }
 
 void GameManager::AddToLayer(Layer* layer) const
@@ -52,7 +56,7 @@ void GameManager::AddToLayer(Layer* layer) const
 	layer->addChild(m_player, 1);
 	layer->addChild(m_playerBar, 0);
 	layer->addChild(m_babe, 0);
-
+	
 	for (auto& gameObject : m_gameObjects)
 		layer->addChild(gameObject, -1);
 }
