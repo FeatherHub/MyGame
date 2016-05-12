@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "SnakeGameScene.h"
-#include "InputManager.h"
+#include "Finger.h"
 #include "MapLoader.h"
 
 Scene* SnakeGameScene::createScene()
@@ -20,6 +20,9 @@ bool SnakeGameScene::init()
     {
         return false;
     }
+
+	m_finger = Finger::create();
+	addChild(m_finger);
 
 	scheduleUpdate();
 

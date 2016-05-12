@@ -1,5 +1,7 @@
 #pragma once;
 
+class Finger;
+
 class SnakeGameScene : public Layer
 {
 public:
@@ -11,6 +13,6 @@ public:
 
 private:
 	void update(float delta);
-
+	Finger* m_finger;
 };
 

@@ -2,16 +2,18 @@
 #include "PlayableObject.h"
 
 PlayableObject::PlayableObject() : 
-m_currentKeyCode(EventKeyboard::KeyCode::KEY_NONE),
+m_pressedKey(EventKeyboard::KeyCode::KEY_NONE),
+m_releasedKey(EventKeyboard::KeyCode::KEY_NONE),
 m_direction(WEST), 
 m_speed(DEFAULT_SPEED),
-m_sprite(nullptr)
+m_sprite(nullptr),
+m_isCollided(false)
 {
+	m_audioPlayer = CocosDenshion::SimpleAudioEngine::getInstance();
 	for (bool& keyState : m_keyState)
 	{
 		keyState = false;
 	}
-	m_audioPlayer = CocosDenshion::SimpleAudioEngine::getInstance();
 }
 
 bool PlayableObject::init()
@@ -27,28 +29,9 @@ bool PlayableObject::init()
 	return true;
 }
 
-void PlayableObject::ResetKeyState()
-{
-	m_currentKeyCode = EventKeyboard::KeyCode::KEY_NONE;
-	for (bool& keyState : m_keyState)
-	{
-		keyState = false;
-	}
-}
-
-Rect PlayableObject::GetBoundingBox()
-{
-	Vec2 curPos = getPosition();
-	Rect sprBox = m_sprite->getBoundingBox();
-	curPos.x -= sprBox.size.width / 2;
-	curPos.y -= sprBox.size.height / 2;
-	sprBox.origin = curPos;
-	return sprBox;
-}
-
 void PlayableObject::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 {
-	m_currentKeyCode = keyCode;
+	m_pressedKey = keyCode;
 	switch (keyCode)
 	{
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
@@ -74,26 +57,54 @@ void PlayableObject::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 
 void PlayableObject::OnKeyReleased(EventKeyboard::KeyCode keyCode)
 {
-	m_currentKeyCode = EventKeyboard::KeyCode::KEY_NONE;
+	m_pressedKey = EventKeyboard::KeyCode::KEY_NONE;
 	switch (keyCode)
 	{
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
 		m_keyState[LEFT] = false;
+		m_releasedKey = EventKeyboard::KeyCode::KEY_LEFT_ARROW;
 		break;
 	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
 		m_keyState[RIGHT] = false;
+		m_releasedKey = EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
 		break;
 	case EventKeyboard::KeyCode::KEY_UP_ARROW:
 		m_keyState[UP] = false;
+		m_releasedKey = EventKeyboard::KeyCode::KEY_UP_ARROW;
 		break;
 	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
 		m_keyState[DOWN] = false;
+		m_releasedKey = EventKeyboard::KeyCode::KEY_DOWN_ARROW;
 		break;
 	case EventKeyboard::KeyCode::KEY_SPACE:
 		m_keyState[SPACE] = false;
+		m_releasedKey = EventKeyboard::KeyCode::KEY_SPACE;
 		break;
 	case EventKeyboard::KeyCode::KEY_ESCAPE:
 		m_keyState[EXIT] = false;
+		m_releasedKey = EventKeyboard::KeyCode::KEY_ESCAPE;
 		break;
+	default:
+		m_releasedKey = EventKeyboard::KeyCode::KEY_NONE;
 	}
+}
+
+void PlayableObject::ResetKeyState()
+{
+	m_pressedKey = EventKeyboard::KeyCode::KEY_NONE;
+	m_releasedKey = EventKeyboard::KeyCode::KEY_NONE;
+	for (bool& keyState : m_keyState)
+	{
+		keyState = false;
+	}
+}
+
+Rect PlayableObject::GetBoundingBox()
+{
+	Vec2 curPos = getPosition();
+	Rect sprBox = m_sprite->getBoundingBox();
+	curPos.x -= sprBox.size.width / 2;
+	curPos.y -= sprBox.size.height / 2;
+	sprBox.origin = curPos;
+	return sprBox;
 }

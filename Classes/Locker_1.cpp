@@ -15,6 +15,8 @@ bool Locker_1::init()
 	m_sprite = Sprite::create("locker_1.png");
 	m_sprite->setScale(0.3f);
 	addChild(m_sprite);
+
+	return true;
 }
 
 void Locker_1::Play()

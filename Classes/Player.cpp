@@ -66,9 +66,9 @@ void Player::update(float dt)
 
 	
 
-	if (m_currentKeyCode == EventKeyboard::KeyCode::KEY_SPACE)
+	if (m_pressedKey == EventKeyboard::KeyCode::KEY_SPACE)
 	{
-		m_currentKeyCode = EventKeyboard::KeyCode::KEY_NONE;
+		m_pressedKey = EventKeyboard::KeyCode::KEY_NONE;
 		m_isRequesting = true;
 	}
 	else
