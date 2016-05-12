@@ -1,6 +1,7 @@
 #pragma once;
 
 class Finger;
+class MapLoader;
 
 class SnakeGameScene : public Layer
 {
@@ -13,6 +14,7 @@ public:
 
 private:
 	void update(float delta);
+	MapLoader* m_mapLoader;
 	Finger* m_finger;
 };
 

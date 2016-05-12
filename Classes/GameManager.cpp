@@ -50,7 +50,7 @@ void GameManager::AddToLayer(Layer* layer) const
 		return;
 
 	m_mapLoader->SetLayer(layer);
-	m_mapLoader->PrintMap();
+	m_mapLoader->PrintMap("map.tmx");
 
 	layer->addChild(m_player, 1);
 	layer->addChild(m_playerBar, 0);

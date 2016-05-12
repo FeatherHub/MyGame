@@ -13,12 +13,6 @@
     <Filter Include="Scene\Game">
       <UniqueIdentifier>{8c208b87-5680-42fb-a60f-f47b2ab5ae69}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene\Test">
-      <UniqueIdentifier>{7747b1d0-15f4-46db-a7fd-ea99d599e478}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Main">
-      <UniqueIdentifier>{ade2bb8e-cf9c-42a9-8208-0d50505d8196}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject">
       <UniqueIdentifier>{a735c499-2a65-47a3-aa56-843e50c7bb3f}</UniqueIdentifier>
     </Filter>
@@ -49,9 +43,6 @@
       <Filter>win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\MainScene.cpp">
-      <Filter>Scene\Main</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Player.cpp">
       <Filter>PlayerObject</Filter>
     </ClCompile>
@@ -80,9 +71,6 @@
     <ClCompile Include="..\Classes\Locker_1.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameScene.cpp">
-      <Filter>Scene\Test</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Babe.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
@@ -95,15 +83,18 @@
     <ClCompile Include="..\Classes\Finger.cpp">
       <Filter>PlayerObject</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MainScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameScene.cpp">
+      <Filter>Scene\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\MainScene.h">
-      <Filter>Scene\Main</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Player.h">
       <Filter>PlayerObject</Filter>
     </ClInclude>
@@ -153,9 +144,6 @@
     <ClInclude Include="..\Classes\Locker_1.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameScene.h">
-      <Filter>Scene\Test</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Babe.h">
       <Filter>GameObject</Filter>
     </ClInclude>
@@ -167,6 +155,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Finger.h">
       <Filter>PlayerObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameScene.h">
+      <Filter>Scene\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

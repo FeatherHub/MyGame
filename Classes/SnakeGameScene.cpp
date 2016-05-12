@@ -24,6 +24,10 @@ bool SnakeGameScene::init()
 	m_finger = Finger::create();
 	addChild(m_finger);
 
+	m_mapLoader = new MapLoader();
+	m_mapLoader->SetLayer(this);
+	m_mapLoader->PrintMap("snake.tmx");
+
 	scheduleUpdate();
 
     return true;
