@@ -2,15 +2,14 @@
 #define __TEST_SCENE_H__
 
 class Player;
-class InputManager;
 class GameManager;
 
-class TestScene : public Layer
+class GameScene : public Layer
 {
 public:
     static cocos2d::Scene* createScene();
 
-	CREATE_FUNC(TestScene);
+	CREATE_FUNC(GameScene);
 
 	virtual bool init();
 
@@ -18,7 +17,6 @@ public:
 
 private:
 	GameManager* m_gameManager;
-	InputManager* m_inputManager;
 };
 
 #endif

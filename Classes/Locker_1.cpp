@@ -13,6 +13,7 @@ bool Locker_1::init()
 	m_available = true;
 
 	m_sprite = Sprite::create("locker_1.png");
+	m_sprite->setScale(0.3f);
 	addChild(m_sprite);
 }
 
@@ -26,5 +27,5 @@ void Locker_1::Play()
 
 void Locker_1::SetEffect(Player* player, Babe* babe)
 {
-
+	player->ResetKeyState();
 }

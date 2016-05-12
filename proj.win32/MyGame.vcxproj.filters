@@ -37,14 +37,8 @@
     <Filter Include="PlayerObject\Base">
       <UniqueIdentifier>{9c191bbf-e07b-4438-9bd7-eef269abd2a5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Mirror">
-      <UniqueIdentifier>{f7021dce-a3fa-4dcb-858b-7f3f60bcd883}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Loader">
       <UniqueIdentifier>{a97f19a4-e06b-402d-b8c8-9396d41df47c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Wall">
-      <UniqueIdentifier>{b41b1a60-4e08-4b47-b0e9-9e6e4d15675f}</UniqueIdentifier>
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{12b84313-5c32-418b-b0c8-1d9a4eb5c354}</UniqueIdentifier>
@@ -58,9 +52,6 @@
     <ClCompile Include="..\Classes\MainScene.cpp">
       <Filter>Scene\Main</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\TestScene.cpp">
-      <Filter>Scene\Test</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Player.cpp">
       <Filter>PlayerObject</Filter>
     </ClCompile>
@@ -71,9 +62,6 @@
     <ClCompile Include="..\Classes\GameManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Mirror.cpp">
-      <Filter>GameObject\Mirror</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\PlayableObject.cpp">
       <Filter>PlayerObject\Base</Filter>
     </ClCompile>
@@ -82,12 +70,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MapLoader.cpp">
       <Filter>Loader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Wall.cpp">
-      <Filter>GameObject\Wall</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Babe.cpp">
-      <Filter>PlayerObject</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Bar.cpp">
       <Filter>UI</Filter>
@@ -98,6 +80,21 @@
     <ClCompile Include="..\Classes\Locker_1.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GameScene.cpp">
+      <Filter>Scene\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Babe.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Wall.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Mirror.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Finger.cpp">
+      <Filter>PlayerObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -106,9 +103,6 @@
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\MainScene.h">
       <Filter>Scene\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\TestScene.h">
-      <Filter>Scene\Test</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Player.h">
       <Filter>PlayerObject</Filter>
@@ -125,9 +119,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameManager.h">
       <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Mirror.h">
-      <Filter>GameObject\Mirror</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\PlayableObject.h">
       <Filter>PlayerObject\Base</Filter>
@@ -147,12 +138,6 @@
     <ClInclude Include="..\Classes\MapConfig.h">
       <Filter>Config</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Wall.h">
-      <Filter>GameObject\Wall</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Babe.h">
-      <Filter>PlayerObject</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\BabeConfig.h">
       <Filter>Config</Filter>
     </ClInclude>
@@ -167,6 +152,21 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Locker_1.h">
       <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameScene.h">
+      <Filter>Scene\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Babe.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Wall.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Mirror.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Finger.h">
+      <Filter>PlayerObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

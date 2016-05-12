@@ -1,17 +1,27 @@
 #pragma once
 
+#include "SimpleAudioEngine.h"
+#include "PlayerConfig.h"
+#include "KeyConfig.h"
+
 class PlayableObject : public Node
 {
 public:
 	PlayableObject();
-	~PlayableObject();
+	virtual ~PlayableObject() = default;
 	virtual bool init() override;
-	void InitKeyState(bool* keyState) { m_keyState = keyState; }
-	void SetCurrentKey(EventKeyboard::KeyCode keyCode) { m_currentKeyCode = keyCode; }
-	void StartUpdate() { scheduleUpdate(); }
-	void StopUpdate() { unscheduleUpdate(); }
-
+	void ResetKeyState();
+	Rect GetBoundingBox();
+	DIRECTION GetDirection() { return m_direction; };
+	float GetSpeed() { return m_speed; }
 protected:
-	bool* m_keyState = nullptr;
-	EventKeyboard::KeyCode m_currentKeyCode = EventKeyboard::KeyCode::KEY_NONE;
+	void OnKeyPressed(EventKeyboard::KeyCode keyCode);
+	void OnKeyReleased(EventKeyboard::KeyCode keyCode);
+	bool m_keyState[KEYCODE_NUMBER];
+	EventKeyboard::KeyCode m_currentKeyCode;
+	CocosDenshion::SimpleAudioEngine* m_audioPlayer;
+	bool m_isCollided;
+	Sprite* m_sprite;
+	float m_speed;
+	DIRECTION m_direction;
 };

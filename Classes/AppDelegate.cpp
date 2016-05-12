@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "AppDelegate.h"
 #include "MainScene.h"
-#include "TestScene.h"
+#include "GameScene.h"
 #include "SimpleAudioEngine.h"
 
 USING_NS_CC;

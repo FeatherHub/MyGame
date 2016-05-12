@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "MainScene.h"
 #include "MainSceneConfig.h"
-#include "TestScene.h"
+#include "GameScene.h"
 #include "InputManager.h"
 
 Scene* MainScene::createScene()
@@ -86,7 +86,7 @@ void MainScene::update(float delta)
 		{
 		case START:
 			runAction(CallFunc::create([](){
-				auto scene = TestScene::createScene();
+				auto scene = GameScene::createScene();
 				Director::getInstance()->replaceScene(scene);
 			}));
 			break;

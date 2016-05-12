@@ -149,6 +149,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Babe.cpp" />
     <ClCompile Include="..\Classes\Bar.cpp" />
+    <ClCompile Include="..\Classes\Finger.cpp" />
     <ClCompile Include="..\Classes\GameManager.cpp" />
     <ClCompile Include="..\Classes\GameObject.cpp" />
     <ClCompile Include="..\Classes\Locker_1.cpp" />
@@ -162,7 +163,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\Classes\TestScene.cpp" />
+    <ClCompile Include="..\Classes\GameScene.cpp" />
     <ClCompile Include="..\Classes\Wall.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -171,6 +172,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Babe.h" />
     <ClInclude Include="..\Classes\BabeConfig.h" />
     <ClInclude Include="..\Classes\Bar.h" />
+    <ClInclude Include="..\Classes\Finger.h" />
     <ClInclude Include="..\Classes\GameManager.h" />
     <ClInclude Include="..\Classes\GameManagerConfig.h" />
     <ClInclude Include="..\Classes\GameObjectConfig.h" />
@@ -188,7 +190,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\PlayerConfig.h" />
     <ClInclude Include="..\Classes\PlayableObject.h" />
     <ClInclude Include="..\Classes\stdafx.h" />
-    <ClInclude Include="..\Classes\TestScene.h" />
+    <ClInclude Include="..\Classes\GameScene.h" />
     <ClInclude Include="..\Classes\Wall.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

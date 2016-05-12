@@ -3,15 +3,15 @@
 
 InputManager::InputManager() : m_currentkeyCode(EventKeyboard::KeyCode::KEY_NONE)
 {
-	for (bool& key : m_keyState)
+	for (bool& keyState : m_keyState)
 	{
-		key = false;
+		keyState = false;
 	}
 }
 
 bool InputManager::init()
 {
-	if (!Node::init())
+	if (Node::init() == false)
 	{
 		return false;
 	}
@@ -43,6 +43,8 @@ void InputManager::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 		break;
 	case EventKeyboard::KeyCode::KEY_SPACE:
 		m_keyState[SPACE] = true;
+		break;
+	case EventKeyboard::KeyCode::KEY_ESCAPE:
 		break;
 	}
 }

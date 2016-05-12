@@ -1,19 +1,99 @@
 #include "stdafx.h"
 #include "PlayableObject.h"
 
-PlayableObject::PlayableObject() : m_keyState(nullptr), 
-m_currentKeyCode(EventKeyboard::KeyCode::KEY_NONE)
+PlayableObject::PlayableObject() : 
+m_currentKeyCode(EventKeyboard::KeyCode::KEY_NONE),
+m_direction(WEST), 
+m_speed(DEFAULT_SPEED),
+m_sprite(nullptr)
 {
-}
-
-PlayableObject::~PlayableObject()
-{
+	for (bool& keyState : m_keyState)
+	{
+		keyState = false;
+	}
+	m_audioPlayer = CocosDenshion::SimpleAudioEngine::getInstance();
 }
 
 bool PlayableObject::init()
 {
-	if (!Node::init())
+	if (Node::init() == false)
 		return false;
 
+	EventListenerKeyboard* keyboardListener = EventListenerKeyboard::create();
+	keyboardListener->onKeyPressed = CC_CALLBACK_1(PlayableObject::OnKeyPressed, this);
+	keyboardListener->onKeyReleased = CC_CALLBACK_1(PlayableObject::OnKeyReleased, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(keyboardListener, this);
+	
 	return true;
+}
+
+void PlayableObject::ResetKeyState()
+{
+	m_currentKeyCode = EventKeyboard::KeyCode::KEY_NONE;
+	for (bool& keyState : m_keyState)
+	{
+		keyState = false;
+	}
+}
+
+Rect PlayableObject::GetBoundingBox()
+{
+	Vec2 curPos = getPosition();
+	Rect sprBox = m_sprite->getBoundingBox();
+	curPos.x -= sprBox.size.width / 2;
+	curPos.y -= sprBox.size.height / 2;
+	sprBox.origin = curPos;
+	return sprBox;
+}
+
+void PlayableObject::OnKeyPressed(EventKeyboard::KeyCode keyCode)
+{
+	m_currentKeyCode = keyCode;
+	switch (keyCode)
+	{
+	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+		m_keyState[LEFT] = true;
+		break;
+	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+		m_keyState[RIGHT] = true;
+		break;
+	case EventKeyboard::KeyCode::KEY_UP_ARROW:
+		m_keyState[UP] = true;
+		break;
+	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+		m_keyState[DOWN] = true;
+		break;
+	case EventKeyboard::KeyCode::KEY_SPACE:
+		m_keyState[SPACE] = true;
+		break;
+	case EventKeyboard::KeyCode::KEY_ESCAPE:
+		m_keyState[EXIT] = true;
+		break;
+	}
+}
+
+void PlayableObject::OnKeyReleased(EventKeyboard::KeyCode keyCode)
+{
+	m_currentKeyCode = EventKeyboard::KeyCode::KEY_NONE;
+	switch (keyCode)
+	{
+	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+		m_keyState[LEFT] = false;
+		break;
+	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+		m_keyState[RIGHT] = false;
+		break;
+	case EventKeyboard::KeyCode::KEY_UP_ARROW:
+		m_keyState[UP] = false;
+		break;
+	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+		m_keyState[DOWN] = false;
+		break;
+	case EventKeyboard::KeyCode::KEY_SPACE:
+		m_keyState[SPACE] = false;
+		break;
+	case EventKeyboard::KeyCode::KEY_ESCAPE:
+		m_keyState[EXIT] = false;
+		break;
+	}
 }

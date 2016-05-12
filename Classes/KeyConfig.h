@@ -7,5 +7,6 @@ enum KEYCODE : short
 	UP,
 	RIGHT,
 	SPACE,
+	EXIT,
 	KEYCODE_NUMBER
 };
