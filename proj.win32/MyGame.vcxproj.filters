@@ -89,6 +89,12 @@
     <ClCompile Include="..\Classes\GameScene.cpp">
       <Filter>Scene\Game</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\TestScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TextWriter.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -161,6 +167,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameScene.h">
       <Filter>Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TestScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TextWriter.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

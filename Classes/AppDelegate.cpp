@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "AppDelegate.h"
 #include "MainScene.h"
-#include "GameScene.h"
+#include "TestScene.h"
 #include "SimpleAudioEngine.h"
 
 USING_NS_CC;
@@ -53,7 +53,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     register_all_packages();
 
-    auto scene = MainScene::createScene();
+    auto scene = TestScene::createScene();
 
     director->runWithScene(scene);
 
