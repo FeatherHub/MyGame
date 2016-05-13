@@ -101,10 +101,10 @@ void PlayableObject::ResetKeyState()
 
 Rect PlayableObject::GetBoundingBox()
 {
-	Vec2 curPos = getPosition();
+	Vec2 nodePos = getPosition();
 	Rect sprBox = m_sprite->getBoundingBox();
-	curPos.x -= sprBox.size.width / 2;
-	curPos.y -= sprBox.size.height / 2;
-	sprBox.origin = curPos;
+	nodePos.x -= sprBox.size.width / 2;
+	nodePos.y -= sprBox.size.height / 2;
+	sprBox.origin = nodePos;
 	return sprBox;
 }

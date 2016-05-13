@@ -22,7 +22,7 @@ bool SnakeGameScene::init()
     }
 
 	m_finger = Finger::create();
-	addChild(m_finger);
+	addChild(m_finger, 2);
 
 	m_mapLoader = new MapLoader();
 	m_mapLoader->SetLayer(this);
