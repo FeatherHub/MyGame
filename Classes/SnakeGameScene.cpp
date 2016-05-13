@@ -21,7 +21,7 @@ bool SnakeGameScene::init()
     }
 
 	m_finger = Finger::create();
-	m_finger->setPosition(Vec2(32, 0));
+	m_finger->setPosition(Vec2(40, 0));
 	addChild(m_finger, 2);
 
 	m_map = TMXTiledMap::create("snake.tmx");
@@ -49,5 +49,6 @@ void SnakeGameScene::update(float delta)
 			}
 		}
 	}
+
 }
 

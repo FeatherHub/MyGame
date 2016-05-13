@@ -49,7 +49,6 @@ void GameManager::AddToLayer(Layer* layer) const
 		return;
 
 	layer->addChild(m_map, -1);
-
 	layer->addChild(m_player, 1);
 	layer->addChild(m_playerBar, 0);
 	layer->addChild(m_babe, 0);
@@ -66,9 +65,8 @@ void GameManager::Play()
 	switch (state)
 	{
 	case ENTER_BABE:
-	{
 		m_player->EnterEvent(m_babe->getPosition());
-	}
+	
 		break;
 	case IN_BABE:
 	{
@@ -87,7 +85,7 @@ void GameManager::Play()
 void GameManager::MakeInteraction()
 {
 	if (m_player->IsRequesting() == false ||
-		IsInteractionAvailable() == false)
+		IsAvailable() == false)
 		return;
 
 	OBJECT_TYPE objectType = CheckCollision();
@@ -112,7 +110,7 @@ OBJECT_TYPE GameManager::CheckCollision() const
 	return OBJECT_TYPE::NONE;
 }
 
-bool GameManager::IsInteractionAvailable() const
+bool GameManager::IsAvailable() const
 {
 	return true;
 }

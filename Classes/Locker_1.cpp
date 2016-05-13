@@ -22,7 +22,7 @@ bool Locker_1::init()
 void Locker_1::Play()
 {
 	runAction(CallFunc::create([](){
-		Director::getInstance()->pushScene(
+		Director::getInstance()->replaceScene(
 			SnakeGameScene::createScene());
 	}));
 }

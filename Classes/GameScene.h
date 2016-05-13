@@ -1,7 +1,6 @@
 #ifndef __GAME_SCENE_H__
 #define __GAME_SCENE_H__
 
-class Player;
 class GameManager;
 
 class GameScene : public Layer

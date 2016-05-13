@@ -20,7 +20,7 @@ protected:
 	bool m_keyState[KEYCODE_NUMBER];
 	EventKeyboard::KeyCode m_pressedKey = EventKeyboard::KeyCode::KEY_NONE;
 	EventKeyboard::KeyCode m_releasedKey = EventKeyboard::KeyCode::KEY_NONE;
-
+	EventListenerKeyboard* m_keyboardListener;
 	CocosDenshion::SimpleAudioEngine* m_audioPlayer;
 	bool m_isCollided = false;
 	Sprite* m_sprite = nullptr;

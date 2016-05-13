@@ -14,10 +14,8 @@ public:
 	GameManager();
 	~GameManager();
 
-	//GameManager를 씬에서 생성하고 아래 함수를 호출해주어야 합니다
 	void AddToLayer(Layer* layer) const;
 
-	//씬의 update 부분에서 아래 함수를 호출해주어야 합니다.
 	void Play();
 
 private:
@@ -25,7 +23,7 @@ private:
 	void MakeInteraction();
 	
 	OBJECT_TYPE CheckCollision() const;
-	bool IsInteractionAvailable() const;
+	bool IsAvailable() const;
 
 	TMXTiledMap* m_map;
 	Vector<GameObject*> m_gameObjects;

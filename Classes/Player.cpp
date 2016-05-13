@@ -4,7 +4,8 @@
 
 Player::Player() : 
 m_state(OUT_BABE),
-m_isRequesting(false)
+m_isRequesting(false),
+m_stopControl(false)
 {
 	m_guage[ENTER_BABE] = 0;
 	m_guage[EXIT_BABE] = 0;
@@ -29,18 +30,18 @@ void Player::update(float dt)
 	if (m_guage[ENTER_BABE] > 3.0f)
 	{
 		m_guage[ENTER_BABE] = 0.f;
- 		m_audioPlayer->playEffect("enter_babe.wav");
-		m_bar->SetEffect(-0.4f);
    		m_state = ENTER_BABE;
 	}
 
 	if (m_guage[EXIT_BABE] > 3.0f)
 	{
 		m_guage[EXIT_BABE] = 0.f;
-		m_audioPlayer->playEffect("exit_babe.wav");
 		m_state = EXIT_BABE;
 		ExitEvent();
 	}
+
+	if (m_stopControl)
+		return;
 
 	if (m_state == IN_BABE &&
 		m_keyState[UP] && m_keyState[SPACE])
@@ -62,9 +63,7 @@ void Player::update(float dt)
 	else
 	{
 		m_guage[ENTER_BABE] = 0;
-	}
-
-	
+	}	
 
 	if (m_pressedKey == EventKeyboard::KeyCode::KEY_SPACE)
 	{
@@ -92,21 +91,27 @@ void Player::update(float dt)
 
 void Player::EnterEvent(Vec2 babePos)
 {
+	m_audioPlayer->playEffect("enter_babe.wav");
+	m_bar->SetEffect(-0.1f);
+	m_stopControl = true;
+	m_state = WAIT;
+
 	runAction(Sequence::create(
-		CallFunc::create([&](){ ResetKeyState(); }),
 		MoveTo::create(1.0f, babePos),
-		CallFunc::create([&](){ m_state = IN_BABE; }),
-		DelayTime::create(1.0f),
+		CallFunc::create([&](){ m_state = IN_BABE; ResetKeyState(); m_stopControl = false; }),
 		nullptr
 		));
 }
 
 void Player::ExitEvent()
 {
+	m_audioPlayer->playEffect("exit_babe.wav");
+	m_stopControl = true;
+	m_state = OUT_BABE;
+
 	runAction(Sequence::create(
-		CallFunc::create([&](){ ResetKeyState(); }),
-		CallFunc::create([&](){ m_state = OUT_BABE; }),
-		MoveTo::create(1.0f, Vec2(100, 100)),
+		MoveTo::create(1.0f, Vec2(100.f, 100.f)),
+		CallFunc::create([&](){ ResetKeyState(); m_stopControl = false; }),
 		nullptr
 		));
 }

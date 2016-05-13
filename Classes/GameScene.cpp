@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "GameScene.h"
 #include "GameManager.h"
-#include "Player.h"
 
 Scene* GameScene::createScene()
 {

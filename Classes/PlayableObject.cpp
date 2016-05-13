@@ -21,11 +21,10 @@ bool PlayableObject::init()
 	if (Node::init() == false)
 		return false;
 
-	EventListenerKeyboard* keyboardListener = EventListenerKeyboard::create();
-	keyboardListener->onKeyPressed = CC_CALLBACK_1(PlayableObject::OnKeyPressed, this);
-	keyboardListener->onKeyReleased = CC_CALLBACK_1(PlayableObject::OnKeyReleased, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(keyboardListener, this);
-	
+	m_keyboardListener = EventListenerKeyboard::create();
+	m_keyboardListener->onKeyPressed = CC_CALLBACK_1(PlayableObject::OnKeyPressed, this);
+	m_keyboardListener->onKeyReleased = CC_CALLBACK_1(PlayableObject::OnKeyReleased, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(m_keyboardListener, this);
 	return true;
 }
 
@@ -60,6 +59,7 @@ void PlayableObject::OnKeyReleased(EventKeyboard::KeyCode keyCode)
 {
 //	log("Key with keycode %d Released", keyCode);
 	m_pressedKey = EventKeyboard::KeyCode::KEY_NONE;
+	m_releasedKey = EventKeyboard::KeyCode::KEY_NONE;
 	switch (keyCode)
 	{
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
@@ -86,8 +86,6 @@ void PlayableObject::OnKeyReleased(EventKeyboard::KeyCode keyCode)
 		m_keyState[EXIT] = false;
 		m_releasedKey = EventKeyboard::KeyCode::KEY_ESCAPE;
 		break;
-	default:
-		m_releasedKey = EventKeyboard::KeyCode::KEY_NONE;
 	}
 }
 
@@ -95,9 +93,9 @@ void PlayableObject::ResetKeyState()
 {
 	m_pressedKey = EventKeyboard::KeyCode::KEY_NONE;
 	m_releasedKey = EventKeyboard::KeyCode::KEY_NONE;
-	for (bool& keyState : m_keyState)
+	for (int i = 0; i < KEYCODE_NUMBER; i++)
 	{
-		keyState = false;
+		m_keyState[i] = false;
 	}
 }
 

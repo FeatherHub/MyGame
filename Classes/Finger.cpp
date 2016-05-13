@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Finger.h"
+#include "GameScene.h"
 
 Finger::Finger() : ACTION_TIME(0.f)
 {
@@ -84,7 +85,7 @@ void Finger::update(float delta)
 		break;
 	case EventKeyboard::KeyCode::KEY_ESCAPE:
 		//test code
-		Director::getInstance()->popScene();
+		Director::getInstance()->replaceScene(GameScene::createScene());
 		break;
 	}
 	

@@ -23,4 +23,5 @@ private:
 	STATE m_state;
 	float m_guage[2];
 	Bar* m_bar;
+	bool m_stopControl;
 };
