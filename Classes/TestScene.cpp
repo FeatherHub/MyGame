@@ -21,7 +21,7 @@ bool TestScene::init()
     }
 	
 	m_textWriter = TextWriter::create();
-	m_textWriter->SetText(this, L"손을 건내요 이건 게임이 아녜요 무슨 말을 하는 거예요?", Vec2(200, 200), 24.f);
+	m_textWriter->SetText(this, L"도레미파 솔라시도 레미파솔 라시도레?", Vec2(270, 250), 24.f, 10);
 	m_textWriter->PrintText();
 	addChild(m_textWriter);
 
