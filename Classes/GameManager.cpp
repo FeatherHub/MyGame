@@ -4,7 +4,6 @@
 #include "Player.h"
 #include "Babe.h"
 #include "GameObject.h"
-#include "MapLoader.h"
 #include "Bar.h"
 #include "Mirror.h"
 #include "Locker_1.h"
@@ -21,7 +20,7 @@ GameManager::~GameManager()
 
 void GameManager::Init()
 {
-	m_mapLoader = new MapLoader;
+	m_map = TMXTiledMap::create("map.tmx");
 
 	m_player = Player::create();
 	m_player->setPosition(300, 300);
@@ -49,8 +48,7 @@ void GameManager::AddToLayer(Layer* layer) const
 	if (!layer)
 		return;
 
-	m_mapLoader->SetLayer(layer);
-	m_mapLoader->PrintMap("map.tmx");
+	layer->addChild(m_map, -1);
 
 	layer->addChild(m_player, 1);
 	layer->addChild(m_playerBar, 0);

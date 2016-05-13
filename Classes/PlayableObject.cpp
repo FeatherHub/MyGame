@@ -31,6 +31,7 @@ bool PlayableObject::init()
 
 void PlayableObject::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 {
+//	log("Key with keycode %d pressed", keyCode);
 	m_pressedKey = keyCode;
 	switch (keyCode)
 	{
@@ -57,6 +58,7 @@ void PlayableObject::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 
 void PlayableObject::OnKeyReleased(EventKeyboard::KeyCode keyCode)
 {
+//	log("Key with keycode %d Released", keyCode);
 	m_pressedKey = EventKeyboard::KeyCode::KEY_NONE;
 	switch (keyCode)
 	{

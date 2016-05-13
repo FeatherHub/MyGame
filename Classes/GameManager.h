@@ -6,7 +6,6 @@
 class Player;
 class Babe;
 class GameObject;
-class MapLoader;
 class Bar;
 
 class GameManager
@@ -28,7 +27,7 @@ private:
 	OBJECT_TYPE CheckCollision() const;
 	bool IsInteractionAvailable() const;
 
-	MapLoader* m_mapLoader;
+	TMXTiledMap* m_map;
 	Vector<GameObject*> m_gameObjects;
 	Player* m_player;
 	Bar* m_playerBar;

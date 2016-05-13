@@ -91,6 +91,18 @@ void Finger::update(float delta)
 	//가가가각 -> HP 0 Game Over Again
 	//가각 -> Turn!
 	
+/*
+	if (m_keyState[UP])
+		setPosition(getPosition() + Vec2(0, +m_speed));
+	if (m_keyState[DOWN])
+		setPosition(getPosition() + Vec2(0, -m_speed));
+	if (m_keyState[LEFT])
+		setPosition(getPosition() + Vec2(-m_speed, 0));
+	if (m_keyState[RIGHT])
+		setPosition(getPosition() + Vec2(m_speed, 0));
+
+	return;
+*/
 	switch (m_direction)
 	{
 	case NORTH:
@@ -118,10 +130,68 @@ void Finger::turn(const float angleDelta, const Vec2& moveDelta)
 
 Rect Finger::GetBoundingBox()
 {
-	Vec2 curPos = getPosition();
 	Rect sprBox = m_sprite->getBoundingBox();
-	curPos.x -= sprBox.size.width / 2;
-	sprBox.origin = curPos;
+	Vec2 nodePos = getPosition();
+	auto sz = sprBox.size;
+	auto or = sprBox.origin;
+
+	switch (m_direction)
+	{
+	case SOUTH:
+		nodePos.x -= sz.width / 2;
+		break;
+	case NORTH:
+		nodePos.x -= sz.width / 2;
+		nodePos.y -= sz.height;
+		break;
+	case WEST:
+		nodePos.y -= sz.width / 2;
+		break;
+	case EAST:
+		nodePos.x -= sz.height;
+		nodePos.y -= sz.width / 2;
+		break;
+	}
+
+	switch (m_direction)
+	{
+	case WEST:
+	case EAST:
+		sprBox.size.setSize(sz.height, sz.width);
+	}
+
+	sprBox.origin = nodePos;
+
+/*
+	auto bot_left = sprBox.origin;
+	auto sz2 = sprBox.size;
+
+	auto parent = getParent();
+
+	enum {
+	TOPLEFT,
+	TOPRIGHT,
+	BOTLEFT,
+	BOTRIGHT
+	};
+
+	Sprite* rect[4] 
+	{	Sprite::create("dot.png"),
+		Sprite::create("dot.png"),
+		Sprite::create("dot.png"),
+		Sprite::create("dot.png")};
+	
+	rect[TOPLEFT] ->setPosition(Vec2(bot_left.x, bot_left.y + sz2.height));
+	rect[TOPRIGHT]->setPosition(Vec2(bot_left.x + sz2.width, bot_left.y + sz2.height));
+	rect[BOTLEFT] ->setPosition(Vec2(bot_left.x, bot_left.y));
+	rect[BOTRIGHT]->setPosition(Vec2(bot_left.x + sz2.width, bot_left.y));
+
+	for (auto& dot : rect)
+	{
+		parent->addChild(dot);
+	}
+*/
+
 	return sprBox;
 }
 
