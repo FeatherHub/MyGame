@@ -3,6 +3,7 @@
 #include "SimpleAudioEngine.h"
 #include "PlayerConfig.h"
 #include "KeyConfig.h"
+#include <list>
 
 class PlayableObject : public Node
 {
@@ -26,4 +27,5 @@ protected:
 	Sprite* m_sprite = nullptr;
 	float m_speed = DEFAULT_SPEED;
 	DIRECTION m_direction = WEST;
+	list<EventKeyboard::KeyCode> m_keyList;
 };

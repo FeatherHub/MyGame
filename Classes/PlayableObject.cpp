@@ -32,6 +32,8 @@ void PlayableObject::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 {
 //	log("Key with keycode %d pressed", keyCode);
 	m_pressedKey = keyCode;
+	m_keyList.push_back(keyCode);
+
 	switch (keyCode)
 	{
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
@@ -60,6 +62,7 @@ void PlayableObject::OnKeyReleased(EventKeyboard::KeyCode keyCode)
 //	log("Key with keycode %d Released", keyCode);
 	m_pressedKey = EventKeyboard::KeyCode::KEY_NONE;
 	m_releasedKey = EventKeyboard::KeyCode::KEY_NONE;
+	m_keyList.remove(keyCode);
 	switch (keyCode)
 	{
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:

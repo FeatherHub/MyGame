@@ -26,84 +26,89 @@ bool Finger::init()
 
 void Finger::update(float delta)
 {
-	switch (m_pressedKey)
+	while (m_keyList.empty() == false)
 	{
-	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-		switch (m_direction)
-		{
-		case WEST:
-			m_direction = SOUTH;
-			turn(-90, Vec2(0, -m_sprSize.width));
-			break;
-		case EAST:
-			m_direction = SOUTH;
-			turn(90, Vec2(0, -m_sprSize.width));
-			break;
-		}
-		break;
-	case EventKeyboard::KeyCode::KEY_UP_ARROW:
-		switch (m_direction)
-		{
-		case WEST:
-			m_direction = NORTH;
-			turn(90, Vec2(0, m_sprSize.width));
-			break;
-		case EAST:
-			m_direction = NORTH;
-			turn(-90, Vec2(0, m_sprSize.width));
-			break;
-		}
-		break;
-	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-		switch (m_direction)
-		{
-		case SOUTH:
-			m_direction = WEST;
-			turn(90, Vec2(-m_sprSize.width, 0));
-			break;
-		case NORTH:
-			m_direction = WEST;
-			turn(-90, Vec2(-m_sprSize.width, 0));
-			break;
-		}
-		break;
-	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-		switch (m_direction)
-		{
-		case SOUTH:
-			m_direction = EAST;
-			turn(-90, Vec2(m_sprSize.width, 0));
-			break;
-		case NORTH:
-			m_direction = EAST;
-			turn(90, Vec2(m_sprSize.width, 0));
-			break;
-		}
-		break;
-	case EventKeyboard::KeyCode::KEY_SPACE:
-		//crash open the locker
-		break;
-	case EventKeyboard::KeyCode::KEY_ESCAPE:
-		//test code
-		Director::getInstance()->replaceScene(GameScene::createScene());
-		break;
-	}
-	
-	//가가가각 -> HP 0 Game Over Again
-	//가각 -> Turn!
-	
-/*
-	if (m_keyState[UP])
-		setPosition(getPosition() + Vec2(0, +m_speed));
-	if (m_keyState[DOWN])
-		setPosition(getPosition() + Vec2(0, -m_speed));
-	if (m_keyState[LEFT])
-		setPosition(getPosition() + Vec2(-m_speed, 0));
-	if (m_keyState[RIGHT])
-		setPosition(getPosition() + Vec2(m_speed, 0));
+		auto curKey = m_keyList.front();
+		m_keyList.pop_front();
 
-	return;
-*/
+		switch (curKey)
+		{
+		case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+			switch (m_direction)
+			{
+			case WEST:
+				m_direction = SOUTH;
+				turn(-90, Vec2(0, -m_sprSize.width));
+				break;
+			case EAST:
+				m_direction = SOUTH;
+				turn(90, Vec2(0, -m_sprSize.width));
+				break;
+			}
+			break;
+		case EventKeyboard::KeyCode::KEY_UP_ARROW:
+			switch (m_direction)
+			{
+			case WEST:
+				m_direction = NORTH;
+				turn(90, Vec2(0, m_sprSize.width));
+				break;
+			case EAST:
+				m_direction = NORTH;
+				turn(-90, Vec2(0, m_sprSize.width));
+				break;
+			}
+			break;
+		case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+			switch (m_direction)
+			{
+			case SOUTH:
+				m_direction = WEST;
+				turn(90, Vec2(-m_sprSize.width, 0));
+				break;
+			case NORTH:
+				m_direction = WEST;
+				turn(-90, Vec2(-m_sprSize.width, 0));
+				break;
+			}
+			break;
+		case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+			switch (m_direction)
+			{
+			case SOUTH:
+				m_direction = EAST;
+				turn(-90, Vec2(m_sprSize.width, 0));
+				break;
+			case NORTH:
+				m_direction = EAST;
+				turn(90, Vec2(m_sprSize.width, 0));
+				break;
+			}
+			break;
+		case EventKeyboard::KeyCode::KEY_SPACE:
+			break;
+		case EventKeyboard::KeyCode::KEY_ESCAPE:
+			Director::getInstance()->replaceScene(GameScene::createScene());
+			break;
+		}
+
+
+		//가가가각 -> HP 0 Game Over Again
+		//가각 -> Turn!
+
+		/*
+			if (m_keyState[UP])
+			setPosition(getPosition() + Vec2(0, +m_speed));
+			if (m_keyState[DOWN])
+			setPosition(getPosition() + Vec2(0, -m_speed));
+			if (m_keyState[LEFT])
+			setPosition(getPosition() + Vec2(-m_speed, 0));
+			if (m_keyState[RIGHT])
+			setPosition(getPosition() + Vec2(m_speed, 0));
+
+			return;
+			*/
+	}
 	switch (m_direction)
 	{
 	case NORTH:
@@ -123,10 +128,8 @@ void Finger::update(float delta)
 
 void Finger::turn(const float angleDelta, const Vec2& moveDelta)
 {
-	runAction(Spawn::create(
-		RotateBy::create(ACTION_TIME, angleDelta),
-		MoveBy::create(ACTION_TIME, moveDelta),
-		nullptr));
+	setPosition(getPosition() + moveDelta);
+	setRotation(getRotation() + angleDelta); 
 }
 
 Rect Finger::GetBoundingBox()
