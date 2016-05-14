@@ -1,12 +1,13 @@
 #include "stdafx.h"
 #include "AppDelegate.h"
+#include "GameScene.h"
 #include "MainScene.h"
 #include "TestScene.h"
 #include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 
-static cocos2d::Size designResolutionSize = cocos2d::Size(512, 512);
+static cocos2d::Size designResolutionSize = cocos2d::Size(720, 400);
 
 AppDelegate::AppDelegate() 
 {
@@ -53,7 +54,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     register_all_packages();
 
-    auto scene = TestScene::createScene();
+    auto scene = GameScene::createScene();
 
     director->runWithScene(scene);
 

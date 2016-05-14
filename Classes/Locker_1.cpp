@@ -13,7 +13,7 @@ bool Locker_1::init()
 	m_available = true;
 
 	m_sprite = Sprite::create("locker_1.png");
-	m_sprite->setScale(0.3f);
+	m_sprite->setScale(0.1f);
 	addChild(m_sprite);
 
 	return true;

@@ -9,6 +9,9 @@ m_stopControl(false)
 {
 	m_guage[ENTER_BABE] = 0;
 	m_guage[EXIT_BABE] = 0;
+	
+	for (int i = 0; i < 4; i++)
+		m_directionAvailable[i] = true;
 }
 
 bool Player::init()
@@ -73,20 +76,51 @@ void Player::update(float dt)
 	else
 		m_isRequesting = false;
 
-	if (m_keyState[UP])
+	auto curPos = getPosition();
+	log("%f %f", curPos.x, curPos.y);
+
+	auto size = m_layer->getLayerSize();
+
+	for (int x = 0; x < size.width; x++)
+	{
+		for (int y = 0; y < size.height; y++)
+		{
+			auto tile = m_layer->tileAt(Vec2(x, y));
+			if (tile)
+			{
+				auto tileBox = tile->getBoundingBox();
+			
+				if (tileBox.containsPoint(curPos + Vec2(DEFAULT_SPEED, 0)))
+					m_directionAvailable[EAST] = false;
+				if (tileBox.containsPoint(curPos + Vec2(-DEFAULT_SPEED, 0)))
+					m_directionAvailable[WEST] = false;
+				if (tileBox.containsPoint(curPos + Vec2(0, DEFAULT_SPEED)))
+					m_directionAvailable[NORTH] = false;
+				if (tileBox.containsPoint(curPos + Vec2(0, -DEFAULT_SPEED)))
+					m_directionAvailable[SOUTH] = false;
+			}
+		}
+	}
+
+	if (m_keyState[UP] && m_directionAvailable[NORTH])
+	{
 		setPosition(getPosition() + Vec2(0, +m_speed));
-	if (m_keyState[DOWN])
+	}
+	if (m_keyState[DOWN] && m_directionAvailable[SOUTH])
+	{
 		setPosition(getPosition() + Vec2(0, -m_speed));
-	if (m_keyState[RIGHT])
+	}
+	if (m_keyState[RIGHT] && m_directionAvailable[EAST])
 	{
 		setPosition(getPosition() + Vec2(m_speed, 0));
-		m_direction = WEST;
 	}
-	if (m_keyState[LEFT])
+	if (m_keyState[LEFT] && m_directionAvailable[WEST])
 	{
 		setPosition(getPosition() + Vec2(-m_speed, 0));
-		m_direction = EAST;
 	}
+
+	for (int i = 0; i < 4; i++)
+		m_directionAvailable[i] = true;
 }
 
 void Player::EnterEvent(Vec2 babePos)

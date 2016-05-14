@@ -20,26 +20,27 @@ GameManager::~GameManager()
 
 void GameManager::Init()
 {
-	m_map = TMXTiledMap::create("map.tmx");
+	m_map = TMXTiledMap::create("myRoom.tmx");
 
 	m_player = Player::create();
-	m_player->setPosition(300, 300);
+	m_player->setPosition(400, 150);
 
 	m_babe = Babe::create();
-	m_babe->setPosition(200, 200);
+	m_babe->setPosition(200, 170);
 
 	m_playerBar = Bar::create();
 	m_playerBar->SetSprite("player_bar_current.png", "player_bar_capacity.png", "player_bar_icon.png");
 	m_playerBar->setPosition(Vec2(200, 30));
 
 	m_player->SetBar(m_playerBar);
+	m_player->SetMap(m_map);
 
 	Mirror* mirror = Mirror::create();
-	mirror->setPosition(Vec2(100, 100));
+	mirror->setPosition(Vec2(345, 210));
 	m_gameObjects.pushBack(mirror);
 
 	Locker_1* locker_1 = Locker_1::create();
-	locker_1->setPosition(Vec2(400, 250));
+	locker_1->setPosition(Vec2(600, 95));
 	m_gameObjects.pushBack(locker_1);
 }
 
@@ -88,12 +89,12 @@ void GameManager::MakeInteraction()
 		IsAvailable() == false)
 		return;
 
-	OBJECT_TYPE objectType = CheckCollision();
+	OBJECT_TYPE objectType = CheckCollisionWithObject();
 
 	m_player->TurnOffRequesting();
 }
 
-OBJECT_TYPE GameManager::CheckCollision() const
+OBJECT_TYPE GameManager::CheckCollisionWithObject() const
 {		
 	const Rect playerBox = m_player->GetBoundingBox();
 

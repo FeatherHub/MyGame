@@ -22,7 +22,7 @@ private:
 	void Init();
 	void MakeInteraction();
 	
-	OBJECT_TYPE CheckCollision() const;
+	OBJECT_TYPE CheckCollisionWithObject() const;
 	bool IsAvailable() const;
 
 	TMXTiledMap* m_map;

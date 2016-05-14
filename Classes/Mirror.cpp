@@ -10,6 +10,7 @@ bool Mirror::init()
 		return false;
 
 	m_sprite = Sprite::create("mirror.png");
+	m_sprite->setScale(0.4f);
 	addChild(m_sprite);
 
 	m_objectType = MIRROR;

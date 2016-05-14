@@ -17,6 +17,7 @@ public:
 	void EnterEvent(Vec2 babePos);
 	void ExitEvent();
 	void SetBar(Bar* bar) { m_bar = bar; }
+	void SetMap(TMXTiledMap* map) { m_map = map; 	m_layer = m_map->layerNamed("Wall"); }
 private:
 	void update(float dt);
 	bool m_isRequesting;
@@ -24,4 +25,7 @@ private:
 	float m_guage[2];
 	Bar* m_bar;
 	bool m_stopControl;
+	TMXTiledMap* m_map;
+	TMXLayer* m_layer;
+	bool m_directionAvailable[4];
 };
