@@ -17,6 +17,7 @@ public:
 
 protected:
 	Sprite* m_sprite;
+	Player* m_player;
 	OBJECT_TYPE m_objectType;
 	bool m_available;
 };

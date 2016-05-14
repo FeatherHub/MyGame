@@ -15,8 +15,9 @@ Rect GameObject::GetBoundingBox()
 {
 	Vec2 curPos = getPosition();
 	Rect sprBox = m_sprite->getBoundingBox();
-	curPos.x -= sprBox.size.width / 2;
-	curPos.y -= sprBox.size.height / 2;
+	auto anchorPoint = m_sprite->getAnchorPoint();
+	curPos.x -= sprBox.size.width * anchorPoint.x;
+	curPos.y -= sprBox.size.height * anchorPoint.y;
 	sprBox.origin = curPos;
 	return sprBox;
 }

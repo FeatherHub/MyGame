@@ -107,7 +107,7 @@ void Finger::update(float delta)
 			setPosition(getPosition() + Vec2(m_speed, 0));
 
 			return;
-			*/
+		*/
 	}
 	switch (m_direction)
 	{

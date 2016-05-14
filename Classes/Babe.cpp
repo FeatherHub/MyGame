@@ -11,6 +11,8 @@ bool Babe::init()
 	if (Node::init() == false)
 		return false;
 
+	setCascadeOpacityEnabled(true);
+
 	m_sprite = Sprite::create("babe.png");
 	m_sprite->setScale(0.3f);
 	addChild(m_sprite);

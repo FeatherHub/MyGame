@@ -7,6 +7,7 @@
 #include "Bar.h"
 #include "Mirror.h"
 #include "Locker_1.h"
+#include "CellPhone.h"
 
 GameManager::GameManager() : m_mode(PLAYER_MODE)
 {
@@ -43,6 +44,10 @@ void GameManager::Init()
 	Locker_1* locker_1 = Locker_1::create();
 	locker_1->setPosition(Vec2(600, 95));
 	m_gameObjects.pushBack(locker_1);
+
+	CellPhone* cellPhone = CellPhone::create();
+	cellPhone->setPosition(Vec2(500, 95));
+	m_gameObjects.pushBack(cellPhone);
 }
 
 void GameManager::AddToLayer(Layer* layer) const

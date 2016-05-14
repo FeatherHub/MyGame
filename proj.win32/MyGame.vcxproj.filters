@@ -74,9 +74,6 @@
     <ClCompile Include="..\Classes\Babe.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Wall.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Mirror.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
@@ -94,6 +91,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\TextWriter.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CellPhone.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -153,9 +153,6 @@
     <ClInclude Include="..\Classes\Babe.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Wall.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Mirror.h">
       <Filter>GameObject</Filter>
     </ClInclude>
@@ -173,6 +170,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\TextWriter.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CellPhone.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

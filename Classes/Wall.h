@@ -1,5 +1,4 @@
 #include "GameObject.h"
-#include "Player.h"
 
 class Player;
 class Babe;
