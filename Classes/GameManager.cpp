@@ -21,6 +21,7 @@ GameManager::~GameManager()
 void GameManager::Init()
 {
 	m_map = TMXTiledMap::create("myRoom.tmx");
+	m_map->setPosition(20, 100);
 
 	m_player = Player::create();
 	m_player->setPosition(400, 150);
@@ -30,7 +31,7 @@ void GameManager::Init()
 
 	m_playerBar = Bar::create();
 	m_playerBar->SetSprite("player_bar_current.png", "player_bar_capacity.png", "player_bar_icon.png");
-	m_playerBar->setPosition(Vec2(200, 30));
+	m_playerBar->setPosition(Vec2(200, -50));
 
 	m_player->SetBar(m_playerBar);
 	m_player->SetMap(m_map);
@@ -46,16 +47,15 @@ void GameManager::Init()
 
 void GameManager::AddToLayer(Layer* layer) const
 {
-	if (!layer)
-		return;
+	layer->addChild(m_map, 0);
 
-	layer->addChild(m_map, -1);
-	layer->addChild(m_player, 1);
-	layer->addChild(m_playerBar, 0);
-	layer->addChild(m_babe, 0);
+	m_map->addChild(m_player, 2);
+	m_map->addChild(m_babe, 3);
 	
 	for (auto& gameObject : m_gameObjects)
-		layer->addChild(gameObject, -1);
+		m_map->addChild(gameObject, 1);
+
+	m_map->addChild(m_playerBar, 2);
 }
 
 void GameManager::Play()

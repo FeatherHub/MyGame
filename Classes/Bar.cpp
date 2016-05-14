@@ -22,7 +22,7 @@ void Bar::SetSprite(string current, string capacity, string icon)
 	m_current->setAnchorPoint(Vec2(0.f, 0.f));
 	m_icon->setAnchorPoint(Vec2(0.f, 0.f));
 
-	m_icon->setPosition(Vec2(-100, 0));
+	m_icon->setPosition(Vec2(-80, -6));
 
 	addChild(m_capacity, 1);
 	addChild(m_current, 2);
