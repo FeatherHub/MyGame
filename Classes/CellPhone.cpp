@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CellPhone.h"
 #include "Player.h"
+#include "TextWriter.h"
 
 bool CellPhone::init()
 {
@@ -68,6 +69,7 @@ void CellPhone::Play()
 	m_phoneUI[UI::SELECTED]->setPosition(UI_LEFT - UI_DELTA);
 	m_cursor = UI::OK;
 	m_monitor = MONITOR::INIT;
+
 	scheduleUpdate();
 }
 
@@ -111,6 +113,7 @@ void CellPhone::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 				break;
 			case CellPhone::BACK:
 				ClosePhone();
+				break;;
 			}
 			break;
 		case CellPhone::MESSAGE:
@@ -129,13 +132,43 @@ void CellPhone::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 				m_phoneUI[UI::RECEIVE]->setOpacity(255);
 				m_phoneUI[UI::TV_AD_HEAD]->setOpacity(0);
 				m_monitor = INIT;
+				break;
 			}
 			break;
 		case CellPhone::READ_MESSAGE:
 			switch (m_cursor)
 			{
 			case CellPhone::OK:
+			{
 				//TYPE_WRITER -> GAME_MODE_GO
+				m_keyboardListener->setEnabled(false);
+
+				auto parent = getParent();
+
+				auto tw1 = TextWriter::create();
+				auto tw2 = TextWriter::create();
+				auto tw3 = TextWriter::create();
+				auto tw4 = TextWriter::create();
+
+				parent->addChild(tw1, 8);
+				parent->addChild(tw2, 8);
+				parent->addChild(tw3, 8);
+				parent->addChild(tw4, 8);
+
+				tw1->SetRelation(nullptr, tw2);
+				tw2->SetRelation(tw1, tw3);
+				tw3->SetRelation(tw2, tw4);
+				tw4->SetRelation(tw3, nullptr);
+
+				Vec2 textPos{300, 50};
+				Vec2 textPos2{ 300, 30 };
+				tw1->SetText(L"이렇게 까지 무기력한 아이일 줄은 몰랐어요.", textPos, 16, false);
+				tw2->SetText(L"여느때보다 버거운 일이 될 것 같네요. 히휴", textPos2, 16, true);
+				tw3->SetText(L"잘 알고 계시겠지만, 지금 하시려는 일", textPos, 16, false);
+				tw4->SetText(L"그러니까 구체적인 결정을 대신하는 것은 당신의 수명을 대가로 한다는 것을 잊진 않으셨죠?", textPos2, 16, false);
+
+				tw1->PrintText();
+			}
 				break;
 			case CellPhone::BACK:
 				m_phoneUI[UI::OK]->setOpacity(255);

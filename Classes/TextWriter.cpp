@@ -5,9 +5,12 @@ bool TextWriter::init()
 {
 	if (Node::init() == false)
 		return false;
-
+	
+	m_elapsed = 0.f;
+	m_currentIdx = 0;
 	m_extraDelta = 0.f;
-
+	m_removeAfterDone = false;
+	m_waitBeforeRemoved = false;
 	m_keyboardListener = EventListenerKeyboard::create();
 	m_keyboardListener->onKeyPressed = CC_CALLBACK_1(TextWriter::OnKeyPressed, this);
 	m_keyboardListener->onKeyReleased = CC_CALLBACK_1(TextWriter::OnKeyReleased, this);
@@ -16,17 +19,19 @@ bool TextWriter::init()
 	return true;
 }
 
-void TextWriter::SetText(Layer* targetLayer, wchar_t* wStr, Vec2 pos, float fontSize, int width)
+void TextWriter::SetText(wchar_t* wStr, Vec2 pos, float fontSize, bool removeAfterDone)
 {
 	WideCharToMultiByte(CP_UTF8, 0, wStr, -1, m_string, 255, NULL, NULL);
-	m_label = Label::createWithTTF(m_string, "fonts/NanumGothic.ttf", fontSize);
+	m_label = Label::createWithTTF(m_string, "fonts/NanumGothic.ttf", fontSize, Size::ZERO,
+		TextHAlignment::LEFT);
 	m_label->setPosition(pos);
 	m_label->setOpacity(0);
-	targetLayer->addChild(m_label);
+	addChild(m_label);
 	
 	m_pos = pos;
-	m_width = width;
 	m_fontSize = fontSize;
+	m_removeAfterDone = removeAfterDone;
+	m_waitBeforeRemoved = m_removeAfterDone;
 	m_length = m_label->getStringLength();
 }
 
@@ -37,18 +42,16 @@ void TextWriter::PrintText()
 
 void TextWriter::update(float delta)
 {
-	static float elapsed = 0;
-	static int currentIdx = 0;
-//	static float previousWidth = 0;
-//	static float previousColPos = 0;
-	elapsed += delta + m_extraDelta;
+//	float previousWidth = 0;
+//	float previousColPos = 0;
+	m_elapsed += delta + m_extraDelta;
 
-	if (elapsed > LETTER_FRAME)
+	if (m_elapsed > LETTER_FRAME)
 	{
-		elapsed = 0;
-		if (currentIdx < m_length)
+		m_elapsed = 0;
+		if (m_currentIdx < m_length)
 		{
-			auto letter = m_label->getLetter(currentIdx);
+			auto letter = m_label->getLetter(m_currentIdx);
 
 /*
 			int row = currentIdx / m_width;
@@ -67,12 +70,37 @@ void TextWriter::update(float delta)
 			previousWidth = letter->getContentSize().width;
 */
 			letter->setOpacity(255);
-			currentIdx++;
+			m_currentIdx++;
 		}
 		else
 		{
 			m_keyboardListener->setEnabled(false);
+
+			if (m_waitBeforeRemoved)
+			{
+				m_waitBeforeRemoved = false;
+				unscheduleUpdate();
+				runAction(Sequence::create(
+					DelayTime::create(0.5f),
+					CallFunc::create([&](){ scheduleUpdate(); }),
+					nullptr));
+				return;
+			}
+		
 			unscheduleUpdate();
+
+			if (m_next != nullptr)
+			{
+				m_next->PrintText();
+			}
+
+			if (m_removeAfterDone)
+			{
+
+				if (m_prev != nullptr)
+					m_prev->removeFromParent();
+				removeFromParent();
+			}
 		}
 	}
 }
