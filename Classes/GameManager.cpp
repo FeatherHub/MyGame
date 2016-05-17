@@ -9,7 +9,8 @@
 #include "Locker_1.h"
 #include "CellPhone.h"
 
-GameManager::GameManager() : m_mode(PLAYER_MODE)
+GameManager::GameManager() 
+: m_mode(PLAYER_MODE)
 {
 	Init();
 }
@@ -21,14 +22,24 @@ GameManager::~GameManager()
 
 void GameManager::Init()
 {
+	auto dir = Director::getInstance();
+	auto vSz = dir->getVisibleSize();
+	auto vOr = dir->getVisibleOrigin();
+
 	m_map = TMXTiledMap::create("myRoom.tmx");
-	m_map->setPosition(20, 100);
+	m_map->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	m_map->setPosition(vSz.width/2, vSz.height/2);
 
 	m_player = Player::create();
 	m_player->setPosition(400, 150);
 
+	m_inBabeBg = Sprite::create("inBabeBg.png");
+	m_inBabeBg->setPosition(m_map->getPosition());
+	m_inBabeBg->setScale(0.7f);
+	m_inBabeBg->setOpacity(0);
+
 	m_babe = Babe::create();
-	m_babe->setPosition(200, 170);
+	m_babe->setPosition(m_babe->BABE_INIT_POS);
 
 	m_playerBar = Bar::create();
 	m_playerBar->SetSprite("player_bar_current.png", "player_bar_capacity.png", "player_bar_icon.png");
@@ -53,6 +64,7 @@ void GameManager::Init()
 void GameManager::AddToLayer(Layer* layer) const
 {
 	layer->addChild(m_map, 0);
+	layer->addChild(m_inBabeBg, -1);
 
 	m_map->addChild(m_player, 2);
 	m_map->addChild(m_babe, 3);
@@ -71,8 +83,11 @@ void GameManager::Play()
 	switch (state)
 	{
 	case ENTER_BABE:
+	{
+		m_inBabeBg->setOpacity(105);
+		m_babe->SetState(CONTROLED);
 		m_player->EnterEvent(m_babe->getPosition());
-	
+	}	
 		break;
 	case IN_BABE:
 	{
@@ -83,8 +98,19 @@ void GameManager::Play()
 		{
 			m_babe->setPosition(babePos + deltaPos);
 		}
+		break;
+	}
+	case EXIT_BABE:
+	{
+		m_inBabeBg->setOpacity(0);
+		m_babe->SetState(WALKAROUND);
+		m_player->ExitEvent();
 	}
 		break;
+	case OUT_BABE:
+	{
+
+	}
 	}
 }
 

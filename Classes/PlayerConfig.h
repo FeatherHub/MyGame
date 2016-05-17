@@ -20,5 +20,5 @@ enum STATE : int
 	EXIT_BABE = 1,
 	IN_BABE = 2,
 	OUT_BABE = 3,
-	WAIT
+	WAIT = 4
 };

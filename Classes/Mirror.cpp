@@ -34,5 +34,5 @@ void Mirror::Play()
 
 void Mirror::SetEffect(Player* player, Babe* babe)
 {
-	player->ExitEvent();
+	player->SetState(EXIT_BABE);
 }

@@ -14,6 +14,7 @@ public:
 	void TurnOffRequesting() { m_isRequesting = false; }
 	bool IsRequesting() { return m_isRequesting; }
 	STATE GetState() { return m_state; }
+	void SetState(STATE state) { m_state = state; }
 	void EnterEvent(Vec2 babePos);
 	void ExitEvent();
 	void SetBar(Bar* bar) { m_bar = bar; }
@@ -28,4 +29,6 @@ private:
 	TMXTiledMap* m_map;
 	TMXLayer* m_layer;
 	bool m_directionAvailable[4];
+private:
+	const float STAND_TIME_INOUT = 1.5f;
 };

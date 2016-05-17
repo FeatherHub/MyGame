@@ -5,7 +5,8 @@
 Player::Player() : 
 m_state(OUT_BABE),
 m_isRequesting(false),
-m_stopControl(false)
+m_stopControl(false),
+STAND_TIME_INOUT(1.5f)
 {
 	m_guage[ENTER_BABE] = 0;
 	m_guage[EXIT_BABE] = 0;
@@ -30,21 +31,20 @@ bool Player::init()
 
 void Player::update(float dt)
 {
-	if (m_guage[ENTER_BABE] > 3.0f)
+	if (m_stopControl)
+		return;
+
+	if (m_guage[ENTER_BABE] > STAND_TIME_INOUT)
 	{
 		m_guage[ENTER_BABE] = 0.f;
    		m_state = ENTER_BABE;
 	}
 
-	if (m_guage[EXIT_BABE] > 3.0f)
+	if (m_guage[EXIT_BABE] > STAND_TIME_INOUT)
 	{
 		m_guage[EXIT_BABE] = 0.f;
 		m_state = EXIT_BABE;
-		ExitEvent();
 	}
-
-	if (m_stopControl)
-		return;
 
 	if (m_state == IN_BABE &&
 		m_keyState[UP] && m_keyState[SPACE])

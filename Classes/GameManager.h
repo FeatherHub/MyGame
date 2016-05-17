@@ -25,6 +25,7 @@ private:
 	OBJECT_TYPE CheckCollisionWithObject() const;
 	bool IsAvailable() const;
 
+	Sprite* m_inBabeBg;
 	TMXTiledMap* m_map;
 	Vector<GameObject*> m_gameObjects;
 	Player* m_player;
