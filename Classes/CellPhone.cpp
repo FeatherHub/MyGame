@@ -152,6 +152,7 @@ void CellPhone::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 				break;
 			case CellPhone::BACK:
 				m_monitor = READ;
+				m_cursor = OK;
 				RemoveTextAndIcon();
 				break;
 			}
@@ -175,11 +176,16 @@ void CellPhone::ClosePhone()
 
 void CellPhone::RemoveTextAndIcon()
 {
-	m_tw3->removeFromParent();
-	m_tw4->removeFromParent();
-	m_yes->removeFromParent();
-	m_no->removeFromParent();
-	m_detSeleceted->removeFromParent();
+	if (m_tw3)
+		m_tw3->removeFromParent();
+	if (m_tw4)
+		m_tw4->removeFromParent();
+	if (m_yes)
+		m_yes->removeFromParent();
+	if (m_no)
+		m_no->removeFromParent();
+	if (m_detSeleceted)
+		m_detSeleceted->removeFromParent();
 }
 
 void CellPhone::ChangeInitToMessage()
@@ -252,16 +258,13 @@ void CellPhone::ChangeReadToSelect()
 	m_tw1->SetText(L"이렇게 까지 무기력한 아이일 줄은 몰랐어요.", textPos, 16, false, false);
 	m_tw2->SetText(L"여느때보다 버거운 일이 될 것 같네요. 히휴", textPos2, 16, true, false);
 	m_tw3->SetText(L"잘 알고 계시겠지만, 지금 하시려는 일", textPos, 16, false, false);
-	m_tw4->SetText(L"그러니까 구체적인 결정을 대신하는 것은 당신의 수명을 대가로 한다는 것을 잊진 않으셨죠?", textPos2, 16, false, false);
+	m_tw4->SetText(L"결정을 대신하는 것은 수명을 대가로 한다는 것을 잊진 않으셨죠?", textPos2, 16, false, false);
 	m_yes->SetText(L"응, 알고 있어", Vec2(220, -20), 14, false, true);
 	m_no->SetText(L"잠깐만, 깜빡하고 있었어", Vec2(370, -20), 14, false, true);
 
 	m_tw1->PrintText();
 
-	m_detSeleceted = Sprite::create("player.png");
-	m_detSeleceted->setScale(0.1f);
-	m_detSeleceted->setPosition(Vec2(285, -20));
-	parent->addChild(m_detSeleceted, 8);
+
 	m_cursor = BACK;
 }
 
@@ -269,7 +272,14 @@ void CellPhone::update(float delta)
 {
 	if (m_tw4->IsDone())
 	{
+		auto parent = getParent();
+		m_detSeleceted = Sprite::create("player.png");
+		m_detSeleceted->setScale(0.1f);
+		m_detSeleceted->setPosition(Vec2(285, -20));
+		parent->addChild(m_detSeleceted, 8); 
+
 		m_monitor = SELECT;
+
 		unscheduleUpdate();
 	}
 }

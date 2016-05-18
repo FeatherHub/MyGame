@@ -15,20 +15,20 @@ protected:
 	void OnKeyPressed(EventKeyboard::KeyCode keyCode);
 	void OnKeyReleased(EventKeyboard::KeyCode keyCode);
 	void update(float delta);
-	char m_string[255];
+	void Remove();
+	EventListenerKeyboard* m_keyboardListener;
+	TextWriter* m_prev;
+	TextWriter* m_next;	
 	Label* m_label;
 	float m_extraDelta;
-	EventListenerKeyboard* m_keyboardListener;
+	char m_string[255];	
 	int m_length;
+	int m_currentIdx;
+	float m_elapsed;
 	bool m_removeAfterDone;
-	bool m_waitBeforeRemoved;
 	bool m_writeInstant;
 	bool m_isDone;
-	TextWriter* m_prev;
-	TextWriter* m_next;
-	float m_elapsed;
-	int m_currentIdx;
 	const float PROMTING_SPEED;
 	const float DEFAULT_SPEED;
-	const float LETTER_FRAME; // 이후: 문자열 길이에 따라서 시간 조절
+	const float LETTER_FRAME;
 };

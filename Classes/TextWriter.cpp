@@ -11,7 +11,6 @@ bool TextWriter::init()
 	m_currentIdx = 0;
 	m_extraDelta = 0.f;
 	m_removeAfterDone = false;
-	m_waitBeforeRemoved = false;
 	m_keyboardListener = EventListenerKeyboard::create();
 	m_keyboardListener->onKeyPressed = CC_CALLBACK_1(TextWriter::OnKeyPressed, this);
 	m_keyboardListener->onKeyReleased = CC_CALLBACK_1(TextWriter::OnKeyReleased, this);
@@ -31,7 +30,6 @@ void TextWriter::SetText(wchar_t* wStr, Vec2 pos, float fontSize, bool removeAft
 	addChild(m_label);
 
 	m_removeAfterDone = removeAfterDone;
-	m_waitBeforeRemoved = m_removeAfterDone;
 	m_writeInstant = writeInstant;
 	m_length = m_label->getStringLength();
 }
@@ -55,34 +53,28 @@ void TextWriter::update(float delta)
 
 	if (m_elapsed > LETTER_FRAME)
 	{
-		m_elapsed = 0;
 		if (m_currentIdx < m_length)
 		{
+			m_elapsed = 0;
 			auto letter = m_label->getLetter(m_currentIdx);
 			letter->setOpacity(255);
 			m_currentIdx++;
 		}
 		else
 		{
-			m_keyboardListener->setEnabled(false);
-
-			if (m_waitBeforeRemoved)
+			if (m_removeAfterDone && m_elapsed < 2.50f)
 			{
-				m_waitBeforeRemoved = false;
-				unscheduleUpdate();
-				runAction(Sequence::create(
-					DelayTime::create(0.85f),
-					CallFunc::create([&](){ scheduleUpdate(); }),
-					nullptr));
 				return;
 			}
-		
-			unscheduleUpdate();
 
 			if (m_next != nullptr)
 			{
 				m_next->PrintText();
 			}
+
+			m_keyboardListener->setEnabled(false);
+			m_isDone = true;
+			unscheduleUpdate();
 
 			if (m_removeAfterDone)
 			{
@@ -90,8 +82,6 @@ void TextWriter::update(float delta)
 					m_prev->removeFromParent();
 				removeFromParent();
 			}
-
-			m_isDone = true;
 		}
 	}
 }
