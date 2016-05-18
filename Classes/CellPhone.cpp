@@ -2,6 +2,7 @@
 #include "CellPhone.h"
 #include "Player.h"
 #include "TextWriter.h"
+#include "Bar.h"
 
 bool CellPhone::init()
 {
@@ -44,7 +45,7 @@ void CellPhone::Play()
 	m_phoneUI[UI::BACK] = Sprite::create("phone_ui_back.png");
 	m_phoneUI[UI::BACK]->setPosition(UI_RIGHT);
 
-	m_phoneUI[UI::SELECTED] = Sprite::create("phone_ui_selected.png");
+	m_phoneUI[UI::UI_SELECTED] = Sprite::create("phone_ui_selected.png");
 
 	m_phoneUI[UI::RECEIVE] = Sprite::create("phone_receive.png");
 	m_phoneUI[UI::RECEIVE]->setPosition(CONTENT_HEAD);
@@ -64,9 +65,9 @@ void CellPhone::Play()
 
 	m_phoneUI[UI::OK]->setOpacity(255);
 	m_phoneUI[UI::CLOSE]->setOpacity(255);
-	m_phoneUI[UI::SELECTED]->setOpacity(255);
+	m_phoneUI[UI::UI_SELECTED]->setOpacity(255);
 	m_phoneUI[UI::RECEIVE]->setOpacity(255);
-	m_phoneUI[UI::SELECTED]->setPosition(UI_LEFT - UI_DELTA);
+	m_phoneUI[UI::UI_SELECTED]->setPosition(UI_LEFT - UI_DELTA);
 	m_cursor = UI::OK;
 	m_monitor = MONITOR::INIT;
 
@@ -84,6 +85,11 @@ void CellPhone::SetEffect(Player* player, Babe* babe)
 	m_black->setScale(10.0f);
 	parent->addChild(m_black, 5);
 	m_black->runAction(FadeTo::create(0.6f, 190));
+
+	auto playerBar = Bar::create();
+	playerBar->SetSprite("player_bar_current.png", "player_bar_capacity.png", "player_bar_icon.png");
+	playerBar->setPosition(Vec2(200, -50));
+	parent->addChild(playerBar, 6);
 }
 
 void CellPhone::OnKeyPressed(EventKeyboard::KeyCode keyCode)
@@ -92,11 +98,17 @@ void CellPhone::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 	{
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
 		m_cursor = OK;
-		m_phoneUI[UI::SELECTED]->setPosition(UI_LEFT - UI_DELTA);
+		if (m_monitor == SELECT)
+			m_detSeleceted->setPosition(YES_POS);
+		else
+			m_phoneUI[UI::UI_SELECTED]->setPosition(UI_LEFT - UI_DELTA);
 		break;
 	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
 		m_cursor = BACK;
-		m_phoneUI[UI::SELECTED]->setPosition(UI_RIGHT - UI_DELTA);
+		if (m_monitor == SELECT)
+			m_detSeleceted->setPosition(NO_POS);
+		else
+			m_phoneUI[UI::UI_SELECTED]->setPosition(UI_RIGHT - UI_DELTA);
 		break;
 	case EventKeyboard::KeyCode::KEY_SPACE:
 		switch (m_monitor)
@@ -140,34 +152,12 @@ void CellPhone::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 			{
 			case CellPhone::OK:
 			{
-				//TYPE_WRITER -> GAME_MODE_GO
-				m_keyboardListener->setEnabled(false);
-
-				auto parent = getParent();
-
-				auto tw1 = TextWriter::create();
-				auto tw2 = TextWriter::create();
-				auto tw3 = TextWriter::create();
-				auto tw4 = TextWriter::create();
-
-				parent->addChild(tw1, 8);
-				parent->addChild(tw2, 8);
-				parent->addChild(tw3, 8);
-				parent->addChild(tw4, 8);
-
-				tw1->SetRelation(nullptr, tw2);
-				tw2->SetRelation(tw1, tw3);
-				tw3->SetRelation(tw2, tw4);
-				tw4->SetRelation(tw3, nullptr);
-
-				Vec2 textPos{300, 50};
-				Vec2 textPos2{ 300, 30 };
-				tw1->SetText(L"이렇게 까지 무기력한 아이일 줄은 몰랐어요.", textPos, 16, false);
-				tw2->SetText(L"여느때보다 버거운 일이 될 것 같네요. 히휴", textPos2, 16, true);
-				tw3->SetText(L"잘 알고 계시겠지만, 지금 하시려는 일", textPos, 16, false);
-				tw4->SetText(L"그러니까 구체적인 결정을 대신하는 것은 당신의 수명을 대가로 한다는 것을 잊진 않으셨죠?", textPos2, 16, false);
-
-				tw1->PrintText();
+				m_monitor = NONE;
+				runAction(Sequence::create(
+					DelayTime::create(1.5f),
+					CallFunc::create([&](){ m_monitor = SELECT; }),
+					nullptr));
+				Select();
 			}
 				break;
 			case CellPhone::BACK:
@@ -178,17 +168,24 @@ void CellPhone::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 				m_monitor = MESSAGE;
 			}
 			break;
+		case SELECT:
+			switch (m_cursor)
+			{
+			case CellPhone::OK:
+				//Let's go Game Scene
+				break;
+			case CellPhone::BACK:
+				m_monitor = READ_MESSAGE;
+				RemoveTextAndIcon();
+				break;
+			}
+			break;
 		}
 		break;
 	case EventKeyboard::KeyCode::KEY_ESCAPE:
 		ClosePhone();
 		break;
 	}
-}
-
-void CellPhone::update(float delta)
-{
-
 }
 
 void CellPhone::ClosePhone()
@@ -199,4 +196,62 @@ void CellPhone::ClosePhone()
 	m_black->removeFromParent();
 	m_player->ResetKeyState();
 	m_player->scheduleUpdate();
+}
+
+void CellPhone::RemoveTextAndIcon()
+{
+	m_tw1->removeFromParent();
+	m_tw2->removeFromParent();
+	m_tw3->removeFromParent();
+	m_tw4->removeFromParent();
+	m_yes->removeFromParent();
+	m_no->removeFromParent();
+	m_detSeleceted->removeFromParent();
+}
+
+void CellPhone::Select()
+{
+	auto parent = getParent();
+
+	m_tw1 = TextWriter::create();
+	m_tw2 = TextWriter::create();
+	m_tw3 = TextWriter::create();
+	m_tw4 = TextWriter::create();
+	m_yes = TextWriter::create();
+	m_no = TextWriter::create();
+
+	parent->addChild(m_tw1, 8);
+	parent->addChild(m_tw2, 8);
+	parent->addChild(m_tw3, 8);
+	parent->addChild(m_tw4, 8);
+	parent->addChild(m_yes, 8);
+	parent->addChild(m_no, 8);
+
+	m_tw1->SetRelation(nullptr, m_tw2);
+	m_tw2->SetRelation(m_tw1, m_tw3);
+	m_tw3->SetRelation(m_tw2, m_tw4);
+	m_tw4->SetRelation(m_tw3, m_yes);
+	m_yes->SetRelation(m_tw4, m_no);
+	m_no->SetRelation(	m_yes, nullptr);
+
+	Vec2 textPos{ 320, 50 };
+	Vec2 textPos2{ 320, 30 };
+	m_tw1->SetText(L"이렇게 까지 무기력한 아이일 줄은 몰랐어요.", textPos, 16, false, false);
+	m_tw2->SetText(L"여느때보다 버거운 일이 될 것 같네요. 히휴", textPos2, 16, true, false);
+	m_tw3->SetText(L"잘 알고 계시겠지만, 지금 하시려는 일", textPos, 16, false, false);
+	m_tw4->SetText(L"그러니까 구체적인 결정을 대신하는 것은 당신의 수명을 대가로 한다는 것을 잊진 않으셨죠?", textPos2, 16, false, false);
+	m_yes->SetText(L"응, 알고 있어", Vec2(220, -20), 14, false, true);
+	m_no->SetText(L"잠깐만, 깜빡하고 있었어", Vec2(370, -20), 14, false, true);
+
+	m_tw1->PrintText();
+
+	m_detSeleceted = Sprite::create("player.png");
+	m_detSeleceted->setScale(0.1f);
+	m_detSeleceted->setPosition(Vec2(285, -20));
+	parent->addChild(m_detSeleceted, 8);
+}
+
+void CellPhone::update(float delta)
+{
+
 }

@@ -19,31 +19,36 @@ bool TextWriter::init()
 	return true;
 }
 
-void TextWriter::SetText(wchar_t* wStr, Vec2 pos, float fontSize, bool removeAfterDone)
+void TextWriter::SetText(wchar_t* wStr, Vec2 pos, float fontSize, bool removeAfterDone, bool writeInstant)
 {
 	WideCharToMultiByte(CP_UTF8, 0, wStr, -1, m_string, 255, NULL, NULL);
 	m_label = Label::createWithTTF(m_string, "fonts/NanumGothic.ttf", fontSize, Size::ZERO,
 		TextHAlignment::LEFT);
 	m_label->setPosition(pos);
 	m_label->setOpacity(0);
-	addChild(m_label);
 	
-	m_pos = pos;
-	m_fontSize = fontSize;
+	addChild(m_label);
+
 	m_removeAfterDone = removeAfterDone;
 	m_waitBeforeRemoved = m_removeAfterDone;
+	m_writeInstant = writeInstant;
 	m_length = m_label->getStringLength();
 }
 
 void TextWriter::PrintText()
 {
-	scheduleUpdate();
+	if (m_writeInstant == true)
+	{
+		m_label->setOpacity(255);
+		if (m_next != nullptr)
+			m_next->PrintText();
+	}
+	else
+		scheduleUpdate();
 }
 
 void TextWriter::update(float delta)
 {
-//	float previousWidth = 0;
-//	float previousColPos = 0;
 	m_elapsed += delta + m_extraDelta;
 
 	if (m_elapsed > LETTER_FRAME)
@@ -52,23 +57,6 @@ void TextWriter::update(float delta)
 		if (m_currentIdx < m_length)
 		{
 			auto letter = m_label->getLetter(m_currentIdx);
-
-/*
-			int row = currentIdx / m_width;
-			
-			if (row > 0)
-			{
-				float rowPos = -((letter->getContentSize().height) * row);
-				
-				if (previousColPos >= ((m_width-1) * m_fontSize))
-					previousColPos = previousWidth;
-
-				float colPos = previousColPos + previousWidth + m_fontSize/10;
-				letter->setPosition(colPos, rowPos);
-				previousColPos = colPos;
-			}
-			previousWidth = letter->getContentSize().width;
-*/
 			letter->setOpacity(255);
 			m_currentIdx++;
 		}
@@ -81,7 +69,7 @@ void TextWriter::update(float delta)
 				m_waitBeforeRemoved = false;
 				unscheduleUpdate();
 				runAction(Sequence::create(
-					DelayTime::create(0.5f),
+					DelayTime::create(0.85f),
 					CallFunc::create([&](){ scheduleUpdate(); }),
 					nullptr));
 				return;
@@ -96,7 +84,6 @@ void TextWriter::update(float delta)
 
 			if (m_removeAfterDone)
 			{
-
 				if (m_prev != nullptr)
 					m_prev->removeFromParent();
 				removeFromParent();

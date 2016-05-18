@@ -44,6 +44,7 @@ void GameManager::Init()
 	m_playerBar = Bar::create();
 	m_playerBar->SetSprite("player_bar_current.png", "player_bar_capacity.png", "player_bar_icon.png");
 	m_playerBar->setPosition(Vec2(200, -50));
+	m_playerBar->setName("PlayerBar");
 
 	m_player->SetBar(m_playerBar);
 	m_player->SetMap(m_map);
