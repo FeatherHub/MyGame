@@ -4,6 +4,7 @@
 
 class Player;
 class Babe;
+class TextWriter;
 
 class CellPhone : public GameObject
 {
@@ -15,10 +16,14 @@ public:
 
 private:
 	void OnKeyPressed(EventKeyboard::KeyCode keyCode);
-	void update(float delta);
 	void ClosePhone();
 	void RemoveTextAndIcon();
-	void Select();
+	void ChangeInitToMessage();
+	void ChangeMessageToRead();
+	void ChangeMessageToInit();
+	void ChangeReadToMessage();
+	void ChangeReadToSelect();
+
 	enum UI
 	{
 		BODY, CLOSE, OK,
@@ -27,11 +32,11 @@ private:
 		UI_NUM
 	};
 
-	enum MONITOR
+	enum MONITOR_STATE
 	{
 		INIT,
 		MESSAGE,
-		READ_MESSAGE,
+		READ,
 		SELECT,
 		NONE
 	};
@@ -40,7 +45,7 @@ private:
 	Sprite* m_black;
 	Sprite* m_phoneUI[UI_NUM];
 	Sprite* m_detSeleceted;
-	MONITOR m_monitor = INIT;
+	MONITOR_STATE m_monitor = INIT;
 	UI m_cursor = BODY;
 
 	TextWriter* m_tw1;
@@ -49,7 +54,6 @@ private:
 	TextWriter* m_tw4;
 	TextWriter* m_yes;
 	TextWriter* m_no;
-
 
 	const Vec2 UI_LEFT {23, 115};
 	const Vec2 UI_RIGHT {60, 115};

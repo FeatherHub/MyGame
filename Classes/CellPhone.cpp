@@ -69,9 +69,7 @@ void CellPhone::Play()
 	m_phoneUI[UI::RECEIVE]->setOpacity(255);
 	m_phoneUI[UI::UI_SELECTED]->setPosition(UI_LEFT - UI_DELTA);
 	m_cursor = UI::OK;
-	m_monitor = MONITOR::INIT;
-
-	scheduleUpdate();
+	m_monitor = MONITOR_STATE::INIT;
 }
 
 void CellPhone::SetEffect(Player* player, Babe* babe)
@@ -117,11 +115,7 @@ void CellPhone::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 			switch (m_cursor)
 			{
 			case CellPhone::OK:
-				m_monitor = MESSAGE;
-				m_phoneUI[UI::CLOSE]->setOpacity(0);
-				m_phoneUI[UI::BACK]->setOpacity(255);
-				m_phoneUI[UI::RECEIVE]->setOpacity(0);
-				m_phoneUI[UI::TV_AD_HEAD]->setOpacity(255);
+				ChangeInitToMessage();
 				break;
 			case CellPhone::BACK:
 				ClosePhone();
@@ -132,40 +126,22 @@ void CellPhone::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 			switch (m_cursor)
 			{
 			case CellPhone::OK:
-				m_monitor = READ_MESSAGE;
-				m_phoneUI[UI::OK]->setOpacity(0);
-				m_phoneUI[UI::SEND]->setOpacity(255);
-				m_phoneUI[UI::TV_AD_HEAD]->setOpacity(0);
-				m_phoneUI[UI::TV_AD_FULL]->setOpacity(255);
+				ChangeMessageToRead();
 				break;
 			case CellPhone::BACK:
-				m_phoneUI[UI::CLOSE]->setOpacity(255);
-				m_phoneUI[UI::BACK]->setOpacity(0);
-				m_phoneUI[UI::RECEIVE]->setOpacity(255);
-				m_phoneUI[UI::TV_AD_HEAD]->setOpacity(0);
-				m_monitor = INIT;
+				ChangeMessageToInit();
 				break;
 			}
 			break;
-		case CellPhone::READ_MESSAGE:
+		case CellPhone::READ:
 			switch (m_cursor)
 			{
 			case CellPhone::OK:
-			{
-				m_monitor = NONE;
-				runAction(Sequence::create(
-					DelayTime::create(1.5f),
-					CallFunc::create([&](){ m_monitor = SELECT; }),
-					nullptr));
-				Select();
-			}
+				ChangeReadToSelect();
 				break;
 			case CellPhone::BACK:
-				m_phoneUI[UI::OK]->setOpacity(255);
-				m_phoneUI[UI::SEND]->setOpacity(0);
-				m_phoneUI[UI::TV_AD_HEAD]->setOpacity(255);
-				m_phoneUI[UI::TV_AD_FULL]->setOpacity(0);
-				m_monitor = MESSAGE;
+				ChangeReadToMessage();
+				break;
 			}
 			break;
 		case SELECT:
@@ -175,7 +151,7 @@ void CellPhone::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 				//Let's go Game Scene
 				break;
 			case CellPhone::BACK:
-				m_monitor = READ_MESSAGE;
+				m_monitor = READ;
 				RemoveTextAndIcon();
 				break;
 			}
@@ -200,8 +176,6 @@ void CellPhone::ClosePhone()
 
 void CellPhone::RemoveTextAndIcon()
 {
-	m_tw1->removeFromParent();
-	m_tw2->removeFromParent();
 	m_tw3->removeFromParent();
 	m_tw4->removeFromParent();
 	m_yes->removeFromParent();
@@ -209,8 +183,50 @@ void CellPhone::RemoveTextAndIcon()
 	m_detSeleceted->removeFromParent();
 }
 
-void CellPhone::Select()
+void CellPhone::ChangeInitToMessage()
 {
+	m_phoneUI[UI::CLOSE]->setOpacity(0);
+	m_phoneUI[UI::BACK]->setOpacity(255);
+	m_phoneUI[UI::RECEIVE]->setOpacity(0);
+	m_phoneUI[UI::TV_AD_HEAD]->setOpacity(255);
+	m_monitor = MESSAGE;
+}
+
+void CellPhone::ChangeMessageToRead()
+{
+	m_monitor = READ;
+	m_phoneUI[UI::OK]->setOpacity(0);
+	m_phoneUI[UI::SEND]->setOpacity(255);
+	m_phoneUI[UI::TV_AD_HEAD]->setOpacity(0);
+	m_phoneUI[UI::TV_AD_FULL]->setOpacity(255);
+}
+
+void CellPhone::ChangeMessageToInit()
+{
+	m_monitor = INIT;
+	m_phoneUI[UI::CLOSE]->setOpacity(255);
+	m_phoneUI[UI::BACK]->setOpacity(0);
+	m_phoneUI[UI::RECEIVE]->setOpacity(255);
+	m_phoneUI[UI::TV_AD_HEAD]->setOpacity(0);
+}
+
+void CellPhone::ChangeReadToMessage()
+{
+	m_monitor = MESSAGE;
+	m_phoneUI[UI::OK]->setOpacity(255);
+	m_phoneUI[UI::SEND]->setOpacity(0);
+	m_phoneUI[UI::TV_AD_HEAD]->setOpacity(255);
+	m_phoneUI[UI::TV_AD_FULL]->setOpacity(0);
+}
+
+void CellPhone::ChangeReadToSelect()
+{
+	m_monitor = NONE;
+	runAction(Sequence::create(
+		DelayTime::create(1.5f),
+		CallFunc::create([&](){ m_monitor = SELECT; }),
+		nullptr));
+
 	auto parent = getParent();
 
 	m_tw1 = TextWriter::create();
@@ -232,7 +248,7 @@ void CellPhone::Select()
 	m_tw3->SetRelation(m_tw2, m_tw4);
 	m_tw4->SetRelation(m_tw3, m_yes);
 	m_yes->SetRelation(m_tw4, m_no);
-	m_no->SetRelation(	m_yes, nullptr);
+	m_no->SetRelation(m_yes, nullptr);
 
 	Vec2 textPos{ 320, 50 };
 	Vec2 textPos2{ 320, 30 };
@@ -249,9 +265,5 @@ void CellPhone::Select()
 	m_detSeleceted->setScale(0.1f);
 	m_detSeleceted->setPosition(Vec2(285, -20));
 	parent->addChild(m_detSeleceted, 8);
-}
-
-void CellPhone::update(float delta)
-{
-
+	m_cursor = BACK;
 }
