@@ -10,6 +10,7 @@ public:
 	void SetText(wchar_t* wStr, Vec2 pos, float fontSize, bool removeAfterDone, bool writeInstant);
 	void PrintText();
 	void SetRelation(TextWriter* prev, TextWriter* next) { m_prev = prev; m_next = next; }
+	bool IsDone() { return m_isDone; }
 protected:
 	void OnKeyPressed(EventKeyboard::KeyCode keyCode);
 	void OnKeyReleased(EventKeyboard::KeyCode keyCode);
@@ -22,6 +23,7 @@ protected:
 	bool m_removeAfterDone;
 	bool m_waitBeforeRemoved;
 	bool m_writeInstant;
+	bool m_isDone;
 	TextWriter* m_prev;
 	TextWriter* m_next;
 	float m_elapsed;

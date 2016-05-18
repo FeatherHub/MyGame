@@ -6,6 +6,7 @@ bool TextWriter::init()
 	if (Node::init() == false)
 		return false;
 	
+	m_isDone = false;
 	m_elapsed = 0.f;
 	m_currentIdx = 0;
 	m_extraDelta = 0.f;
@@ -42,6 +43,7 @@ void TextWriter::PrintText()
 		m_label->setOpacity(255);
 		if (m_next != nullptr)
 			m_next->PrintText();
+		m_isDone = true;
 	}
 	else
 		scheduleUpdate();
@@ -88,6 +90,8 @@ void TextWriter::update(float delta)
 					m_prev->removeFromParent();
 				removeFromParent();
 			}
+
+			m_isDone = true;
 		}
 	}
 }

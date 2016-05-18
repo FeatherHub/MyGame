@@ -166,7 +166,6 @@ void CellPhone::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 
 void CellPhone::ClosePhone()
 {
-	unscheduleUpdate();
 	m_keyboardListener->setEnabled(false);
 	m_phoneUI[BODY]->removeFromParent();
 	m_black->removeFromParent();
@@ -185,11 +184,11 @@ void CellPhone::RemoveTextAndIcon()
 
 void CellPhone::ChangeInitToMessage()
 {
+	m_monitor = MESSAGE;
 	m_phoneUI[UI::CLOSE]->setOpacity(0);
 	m_phoneUI[UI::BACK]->setOpacity(255);
 	m_phoneUI[UI::RECEIVE]->setOpacity(0);
 	m_phoneUI[UI::TV_AD_HEAD]->setOpacity(255);
-	m_monitor = MESSAGE;
 }
 
 void CellPhone::ChangeMessageToRead()
@@ -222,10 +221,8 @@ void CellPhone::ChangeReadToMessage()
 void CellPhone::ChangeReadToSelect()
 {
 	m_monitor = NONE;
-	runAction(Sequence::create(
-		DelayTime::create(1.5f),
-		CallFunc::create([&](){ m_monitor = SELECT; }),
-		nullptr));
+
+	scheduleUpdate();
 
 	auto parent = getParent();
 
@@ -266,4 +263,13 @@ void CellPhone::ChangeReadToSelect()
 	m_detSeleceted->setPosition(Vec2(285, -20));
 	parent->addChild(m_detSeleceted, 8);
 	m_cursor = BACK;
+}
+
+void CellPhone::update(float delta)
+{
+	if (m_tw4->IsDone())
+	{
+		m_monitor = SELECT;
+		unscheduleUpdate();
+	}
 }

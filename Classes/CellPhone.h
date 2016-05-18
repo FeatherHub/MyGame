@@ -23,6 +23,7 @@ private:
 	void ChangeMessageToInit();
 	void ChangeReadToMessage();
 	void ChangeReadToSelect();
+	void update(float delta);
 
 	enum UI
 	{
