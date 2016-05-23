@@ -95,6 +95,9 @@
     <ClCompile Include="..\Classes\CellPhone.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\CellPhoneGameScene.cpp">
+      <Filter>Scene\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -173,6 +176,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\CellPhone.h">
       <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CellPhoneGameScene.h">
+      <Filter>Scene\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
