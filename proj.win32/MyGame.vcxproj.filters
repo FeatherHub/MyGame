@@ -1,17 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="win32">
-      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="resource">
-      <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{ad9ea1e2-9486-4abd-9179-694dc08f5432}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Game">
-      <UniqueIdentifier>{8c208b87-5680-42fb-a60f-f47b2ab5ae69}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject">
       <UniqueIdentifier>{a735c499-2a65-47a3-aa56-843e50c7bb3f}</UniqueIdentifier>
@@ -19,54 +10,34 @@
     <Filter Include="Manager">
       <UniqueIdentifier>{14e8a022-d762-4d46-bc93-2b973418b676}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Config">
-      <UniqueIdentifier>{bdb0a81d-6efe-4ae7-bc7d-b10ff3ddbbc6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Base">
-      <UniqueIdentifier>{24ba54ba-4bd7-40e6-a8a7-d852f9debd42}</UniqueIdentifier>
-    </Filter>
     <Filter Include="PlayerObject">
       <UniqueIdentifier>{08553518-4823-4e6c-bbb8-5253bf1c3436}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PlayerObject\Base">
-      <UniqueIdentifier>{9c191bbf-e07b-4438-9bd7-eef269abd2a5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Loader">
-      <UniqueIdentifier>{a97f19a4-e06b-402d-b8c8-9396d41df47c}</UniqueIdentifier>
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{12b84313-5c32-418b-b0c8-1d9a4eb5c354}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Essential">
+      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{bdb0a81d-6efe-4ae7-bc7d-b10ff3ddbbc6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>win32</Filter>
+      <Filter>Essential</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Player.cpp">
       <Filter>PlayerObject</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\stdafx.cpp" />
-    <ClCompile Include="..\Classes\InputManager.cpp">
-      <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\PlayableObject.cpp">
-      <Filter>PlayerObject\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameObject.cpp">
-      <Filter>GameObject\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MapLoader.cpp">
-      <Filter>Loader</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Bar.cpp">
       <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\SnakeGameScene.cpp">
-      <Filter>Scene\Game</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Locker_1.cpp">
       <Filter>GameObject</Filter>
@@ -83,72 +54,61 @@
     <ClCompile Include="..\Classes\MainScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameScene.cpp">
-      <Filter>Scene\Game</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\TestScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\TextWriter.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CellPhone.cpp">
+    <ClCompile Include="..\Classes\InputManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameScene_01.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SnakeScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>Essential</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\stdafx.cpp">
+      <Filter>Essential</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PlayableObject.cpp">
+      <Filter>PlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CellPhoneGameScene.cpp">
-      <Filter>Scene\Game</Filter>
+    <ClCompile Include="..\Classes\MapLoader.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PhoneScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Phone.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
-      <Filter>win32</Filter>
+      <Filter>Essential</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\Player.h">
       <Filter>PlayerObject</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\stdafx.h" />
     <ClInclude Include="..\Classes\PlayerConfig.h">
-      <Filter>Config</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\InputManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameManagerConfig.h">
       <Filter>Config</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\PlayableObject.h">
-      <Filter>PlayerObject\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameObjectConfig.h">
-      <Filter>Config</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\KeyConfig.h">
-      <Filter>Config</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameObject.h">
-      <Filter>GameObject\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MapLoader.h">
-      <Filter>Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MapConfig.h">
-      <Filter>Config</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\BabeConfig.h">
       <Filter>Config</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Bar.h">
       <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MainSceneConfig.h">
-      <Filter>Config</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\SnakeGameScene.h">
-      <Filter>Scene\Game</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Locker_1.h">
       <Filter>GameObject</Filter>
@@ -165,25 +125,49 @@
     <ClInclude Include="..\Classes\MainScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameScene.h">
-      <Filter>Scene\Game</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\TestScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\TextWriter.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CellPhone.h">
+    <ClInclude Include="..\Classes\InputManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SnakeScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameScene_01.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>Essential</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\stdafx.h">
+      <Filter>Essential</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PlayableObject.h">
+      <Filter>PlayerObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CellPhoneGameScene.h">
-      <Filter>Scene\Game</Filter>
+    <ClInclude Include="..\Classes\BabeConfig.h">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MapLoader.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PhoneScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Phone.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
-      <Filter>resource</Filter>
+      <Filter>Resource</Filter>
     </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -4,7 +4,9 @@
 bool GameObject::init()
 {
 	if (Node::init() == false)
+	{
 		return false;
+	}
 
 	m_available = true;
 

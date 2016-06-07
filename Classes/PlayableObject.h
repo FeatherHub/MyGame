@@ -18,14 +18,14 @@ public:
 protected:
 	void OnKeyPressed(EventKeyboard::KeyCode keyCode);
 	void OnKeyReleased(EventKeyboard::KeyCode keyCode);
-	bool m_keyState[KEYCODE_NUMBER];
+	EventListenerKeyboard* m_keyboardListener;
 	EventKeyboard::KeyCode m_pressedKey = EventKeyboard::KeyCode::KEY_NONE;
 	EventKeyboard::KeyCode m_releasedKey = EventKeyboard::KeyCode::KEY_NONE;
-	EventListenerKeyboard* m_keyboardListener;
-	CocosDenshion::SimpleAudioEngine* m_audioPlayer;
-	bool m_isCollided = false;
-	Sprite* m_sprite = nullptr;
-	float m_speed = DEFAULT_SPEED;
-	DIRECTION m_direction = WEST;
 	list<EventKeyboard::KeyCode> m_keyList;
+	bool m_keyState[KEYCODE_NUMBER];
+	CocosDenshion::SimpleAudioEngine* m_audioPlayer;
+	Sprite* m_sprite = nullptr;
+	DIRECTION m_direction = WEST;
+	bool m_isCollided = false;
+	float m_speed = DEFAULT_SPEED;
 };

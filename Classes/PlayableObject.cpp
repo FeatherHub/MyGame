@@ -10,6 +10,7 @@ m_sprite(nullptr),
 m_isCollided(false)
 {
 	m_audioPlayer = CocosDenshion::SimpleAudioEngine::getInstance();
+
 	for (bool& keyState : m_keyState)
 	{
 		keyState = false;
@@ -19,12 +20,15 @@ m_isCollided(false)
 bool PlayableObject::init()
 {
 	if (Node::init() == false)
+	{
 		return false;
+	}
 
 	m_keyboardListener = EventListenerKeyboard::create();
 	m_keyboardListener->onKeyPressed = CC_CALLBACK_1(PlayableObject::OnKeyPressed, this);
 	m_keyboardListener->onKeyReleased = CC_CALLBACK_1(PlayableObject::OnKeyReleased, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(m_keyboardListener, this);
+
 	return true;
 }
 
@@ -63,6 +67,7 @@ void PlayableObject::OnKeyReleased(EventKeyboard::KeyCode keyCode)
 	m_pressedKey = EventKeyboard::KeyCode::KEY_NONE;
 	m_releasedKey = EventKeyboard::KeyCode::KEY_NONE;
 	m_keyList.remove(keyCode);
+
 	switch (keyCode)
 	{
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:

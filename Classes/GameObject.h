@@ -1,23 +1,19 @@
 #pragma once
 
-#include "GameObjectConfig.h"
-
-class Player;
-class Babe;
+#include "Player.h"
+#include "Babe.h"
 
 class GameObject : public Node
 {
 public:
 	virtual ~GameObject() = default;
 	virtual bool init();
-	virtual void Play() = 0;
-	virtual void SetEffect(Player* player, Babe* babe) = 0;
-	OBJECT_TYPE GetObjectType() { return m_objectType; }
+	virtual void Play(Player* player, Babe* babe) = 0;
 	Rect GetBoundingBox();
 
 protected:
 	Sprite* m_sprite;
 	Player* m_player;
-	OBJECT_TYPE m_objectType;
+	Babe* m_babe;
 	bool m_available;
 };

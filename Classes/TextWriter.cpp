@@ -44,7 +44,9 @@ void TextWriter::PrintText()
 		m_isDone = true;
 	}
 	else
+	{
 		scheduleUpdate();
+	}
 }
 
 void TextWriter::update(float delta)
@@ -78,8 +80,8 @@ void TextWriter::update(float delta)
 
 			if (m_removeAfterDone)
 			{
-				if (m_prev != nullptr)
-					m_prev->removeFromParent();
+				m_prev->removeFromParent();
+
 				removeFromParent();
 			}
 		}
@@ -91,8 +93,6 @@ void TextWriter::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 	switch (keyCode)
 	{
 	case EventKeyboard::KeyCode::KEY_SPACE:
-	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
 		m_extraDelta = PROMTING_SPEED;
 	}
 }
@@ -102,8 +102,6 @@ void TextWriter::OnKeyReleased(EventKeyboard::KeyCode keyCode)
 	switch (keyCode)
 	{
 	case EventKeyboard::KeyCode::KEY_SPACE:
-	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
 		m_extraDelta = 0.f;
 	}
 }

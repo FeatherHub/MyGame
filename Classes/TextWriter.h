@@ -4,7 +4,7 @@ class TextWriter : public Node
 {
 public:
 	CREATE_FUNC(TextWriter);
-	TextWriter() : PROMTING_SPEED(0.2f), DEFAULT_SPEED(0.2f), LETTER_FRAME(0.3f) {}
+	TextWriter() : PROMTING_SPEED(0.4f), LETTER_FRAME(0.05f) {}
 	~TextWriter() = default;
 	bool init() override;
 	void SetText(wchar_t* wStr, Vec2 pos, float fontSize, bool removeAfterDone, bool writeInstant);
@@ -29,6 +29,5 @@ protected:
 	bool m_writeInstant;
 	bool m_isDone;
 	const float PROMTING_SPEED;
-	const float DEFAULT_SPEED;
 	const float LETTER_FRAME;
 };

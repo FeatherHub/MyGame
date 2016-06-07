@@ -1,9 +1,7 @@
 #include "stdafx.h"
 #include "Babe.h"
 
-Babe::Babe() : 
-m_state(IDOL),
-BABE_INIT_POS{ 200, 170 }
+Babe::Babe() : m_state(IDOL)
 {
 
 }
@@ -13,10 +11,7 @@ bool Babe::init()
 	if (Node::init() == false)
 		return false;
 
-	setCascadeOpacityEnabled(true);
-
 	m_sprite = Sprite::create("babe.png");
-	m_sprite->setScale(0.3f);
 	addChild(m_sprite);
 
 	scheduleUpdate();

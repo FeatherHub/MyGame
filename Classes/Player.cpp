@@ -6,7 +6,7 @@ Player::Player() :
 m_state(OUT_BABE),
 m_isRequesting(false),
 m_stopControl(false),
-STAND_TIME_INOUT(1.5f)
+CHARGE_TIME(1.5f)
 {
 	m_guage[ENTER_BABE] = 0;
 	m_guage[EXIT_BABE] = 0;
@@ -21,7 +21,6 @@ bool Player::init()
 		return false;
 
 	m_sprite = Sprite::create("player.png");
-	m_sprite->setScale(0.3f);
 	addChild(m_sprite);
 
 	scheduleUpdate();
@@ -34,13 +33,13 @@ void Player::update(float dt)
 	if (m_stopControl)
 		return;
 
-	if (m_guage[ENTER_BABE] > STAND_TIME_INOUT)
+	if (m_guage[ENTER_BABE] > CHARGE_TIME)
 	{
 		m_guage[ENTER_BABE] = 0.f;
    		m_state = ENTER_BABE;
 	}
 
-	if (m_guage[EXIT_BABE] > STAND_TIME_INOUT)
+	if (m_guage[EXIT_BABE] > CHARGE_TIME)
 	{
 		m_guage[EXIT_BABE] = 0.f;
 		m_state = EXIT_BABE;

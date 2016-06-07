@@ -30,5 +30,5 @@ private:
 	TMXLayer* m_layer;
 	bool m_directionAvailable[4];
 private:
-	const float STAND_TIME_INOUT = 1.5f;
+	const float CHARGE_TIME = 1.5f;
 };

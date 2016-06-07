@@ -1,8 +1,5 @@
 #pragma once
 
-#include "GameManagerConfig.h"
-#include "GameObjectConfig.h"
-
 class Player;
 class Babe;
 class GameObject;
@@ -11,27 +8,24 @@ class Bar;
 class GameManager
 {
 public:
-	GameManager();
-	~GameManager();
-
-	void AddToLayer(Layer* layer) const;
+	GameManager() = default;
+	~GameManager() = default;
 
 	void Play();
+	void RegisterGameObject(GameObject* gameObject) { m_gameObjects.pushBack(gameObject); }
+	void RegisterData(Player* player, Babe* babe, Bar* playerBar, /*Bar* missionBar,*/ TMXTiledMap* room, Sprite* babeBg);
 
 private:
-	void Init();
 	void MakeInteraction();
-	
-	OBJECT_TYPE CheckCollisionWithObject() const;
-	bool IsAvailable() const;
+	void ProcessState();
+	void CheckCollisionWithObject();
 
-	Sprite* m_inBabeBg;
-	TMXTiledMap* m_map;
 	Vector<GameObject*> m_gameObjects;
+	//data to register
 	Player* m_player;
-	Bar* m_playerBar;
-	Bar* m_missionBar;
 	Babe* m_babe;
-	MODE m_mode;
-	Layer* m_runningScene;
+	Bar* m_playerBar;
+	//Bar* m_missionBar;
+	TMXTiledMap* m_room;
+	Sprite* m_babeBg;
 };

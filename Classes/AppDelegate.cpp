@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "AppDelegate.h"
-#include "GameScene.h"
+#include "GameScene_01.h"
 #include "MainScene.h"
 #include "TestScene.h"
 #include "SimpleAudioEngine.h"
@@ -54,7 +54,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     register_all_packages();
 
-    auto scene = GameScene::createScene();
+    auto scene = MainScene::createScene();
 
     director->runWithScene(scene);
 
